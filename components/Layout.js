@@ -4,7 +4,7 @@ import Nav from './nav';
 const Layout = ({ children }) => (
   <div>
     <Head>
-      <title>Home</title>
+      <title>shoecycle</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Nav />

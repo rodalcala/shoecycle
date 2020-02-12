@@ -1,7 +1,9 @@
-import Layout from './../components/Layout';
-import { withApollo } from './../lib/apollo';
-import { useQuery } from '@apollo/react-hooks';
+import Link from 'next/link';
 import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+
+import { withApollo } from './../lib/apollo';
+import Layout from './../components/Layout';
 
 const TITLE_QUERY = gql`
   query TitleQuery {
@@ -18,6 +20,20 @@ const Home = () => {
     <Layout>
       <div>
         <h1 className="title">{data.title}</h1>
+      </div>
+      <div>
+        <ul>
+          <li>
+            <Link href="/giver">
+              <a>Giving</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/receiver">
+              <a>Receiving</a>
+            </Link>
+          </li>
+        </ul>
       </div>
     </Layout>
   );
