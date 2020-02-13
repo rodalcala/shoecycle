@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import './../../lib/sequelize';
 
 const typeDefs = gql`
   type Query {
