@@ -1,0 +1,51 @@
+type Shoe {
+  _id: ID!
+  email: String!
+  verifiedEmail: Boolean!
+  brand: String!
+  model: String!
+  isMaleShoe: Boolean!
+  isTrailShoe: Boolean!
+  size: Float!
+  kilometers: Float!
+  country: String!
+  city: String
+  images: [String]
+  available: Boolean!
+  ships: Boolean!
+  intShipping: Boolean
+  paidShipping: Boolean
+}
+
+input ShoeInput {
+  email: String!
+  verifiedEmail: Boolean
+  brand: String!
+  model: String!
+  isMaleShoe: Boolean
+  isTrailShoe: Boolean
+  size: Float!
+  kilometers: Float!
+  country: String!
+  city: String
+  images: [String]
+  ships: Boolean!
+  intShipping: Boolean
+  paidShipping: Boolean
+}
+
+type Query {
+  shoes: [Shoe]
+  shoeById(id: ID): Shoe
+  shoeByBrand(brand: String): [Shoe]
+}
+
+type Mutation {
+  addShoe(shoe: ShoeInput): ShoeUpdateResponse!
+}
+
+type ShoeUpdateResponse {
+  success: Boolean!
+  message: String
+  shoe: Shoe!
+}
