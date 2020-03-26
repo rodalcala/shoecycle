@@ -1,6 +1,6 @@
 import Shoes from './shoes';
 
-export const resolvers = {
+const resolvers = {
   Query: {
     shoes() {
       try {
@@ -10,6 +10,7 @@ export const resolvers = {
       }
     },
   },
+
   Mutation: {
     async addShoe(_, { shoe }) {
       try {
@@ -25,3 +26,5 @@ export const resolvers = {
     },
   },
 };
+
+export default resolvers;
