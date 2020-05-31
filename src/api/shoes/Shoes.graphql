@@ -4,7 +4,7 @@ type Shoe {
   verifiedEmail: Boolean!
   brand: String!
   model: String!
-  isMaleShoe: Boolean!
+  isFemaleShoe: Boolean!
   isTrailShoe: Boolean!
   size: Float!
   kilometers: Float!
@@ -22,7 +22,7 @@ input ShoeInput {
   verifiedEmail: Boolean
   brand: String!
   model: String!
-  isMaleShoe: Boolean
+  isFemaleShoe: Boolean
   isTrailShoe: Boolean
   size: Float!
   kilometers: Float!
