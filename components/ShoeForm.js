@@ -171,30 +171,6 @@ const ShoeForm = () => {
       <button type="submit">Submit</button>
     </form>
   );
-
-  // return (
-  //   <button onClick={() => {
-  //     addShoe({
-  //       variables: {
-  //         shoe: {
-  //           email: 'tuvieja@entanga.com',
-  //           verifiedEmail: true,
-  //           brand: 'Nike',
-  //           model: 'Pegasus 35',
-  //           isFemaleShoe: true,
-  //           isTrailShoe: false,
-  //           size: 8.5,
-  //           kilometers: 230,
-  //           country: 'Spain',
-  //           city: 'Barcelona',
-  //           ships: true,
-  //           intShipping: true,
-  //           paidShipping: false,
-  //         }
-  //       }
-  //     })
-  //   }}>Giving</button>
-  // );
 };
 
 export default ShoeForm;
