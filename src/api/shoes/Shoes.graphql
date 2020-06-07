@@ -19,7 +19,6 @@ type Shoe {
 
 input ShoeInput {
   email: String!
-  verifiedEmail: Boolean
   brand: String!
   model: String!
   isFemaleShoe: Boolean
