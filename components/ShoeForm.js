@@ -55,10 +55,14 @@ const ShoeForm = () => {
         .max(200, 'We only accept shoes with less than 200kms')
         .required('Required'),
     }),
-    onSubmit: (values, options) => {
+    onSubmit: (values) => {
       addShoe({
         variables: {
-          shoe: values
+          shoe: {
+            ...values,
+            size: parseFloat(values.size),
+            kilometers: parseFloat(values.kilometers),
+          }
         }
       });
     },
