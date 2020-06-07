@@ -70,109 +70,39 @@ const ShoeForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">e-mail address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        value={formik.values.email}
-      />
-      <label htmlFor="brand">brand</label>
-      <input
-        id="brand"
-        name="brand"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.brand}
-      />
-      <label htmlFor="model">model</label>
-      <input
-        id="model"
-        name="model"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.model}
-      />
-      <label htmlFor="size">size</label>
-      <select
-        id="size"
-        name="size"
-        onChange={formik.handleChange}
-        value={formik.values.size}
-      >
+      <label htmlFor='email'>e-mail address</label>
+      <input name='email' {...formik.getFieldProps('email')} />
+      <label htmlFor='brand'>brand</label>
+      <input name='brand' {...formik.getFieldProps('brand')} />
+      <label htmlFor='model'>model</label>
+      <input name='model' {...formik.getFieldProps('model')} />
+      <label htmlFor='size'>size</label>
+      <select id='size' {...formik.getFieldProps('size')}>
         {sizeOptions.map(size => <option key={size} value={size}>{size}</option>)}
       </select>
-      <label htmlFor="isFemaleShoe">female</label>
-      <input
-        id="isFemaleShoe"
-        name="isFemaleShoe"
-        type="checkbox"
-        onChange={formik.handleChange}
-        value={formik.values.isFemaleShoe}
-      />
-      <label htmlFor="isTrailShoe">trail shoe</label>
-      <input
-        id="isTrailShoe"
-        name="isTrailShoe"
-        type="checkbox"
-        onChange={formik.handleChange}
-        value={formik.values.isTrailShoe}
-      />
-      <label htmlFor="kilometers">kilometers</label>
-      <select
-        id="kilometers"
-        name="kilometers"
-        onChange={formik.handleChange}
-        value={formik.values.kilometers}
-      >
+      <label htmlFor='isFemaleShoe'>female</label>
+      <input name='isFemaleShoe' {...formik.getFieldProps('isFemaleShoe')} type='checkbox' />
+      <label htmlFor='isTrailShoe'>trail shoe</label>
+      <input name='isTrailShoe' {...formik.getFieldProps('isTrailShoe')} type='checkbox' />
+      <label htmlFor='kilometers'>kilometers</label>
+      <select name='kilometers' {...formik.getFieldProps('kilometers')}>
         {kilometersOptions.map(kilometers => {
           if (kilometers === 0) return <option key={kilometers} value={kilometers}>new</option>
           if (kilometers === 200) return <option key={kilometers} value={kilometers}>>{kilometers}</option>
           return <option key={kilometers} value={kilometers}>{`<${kilometers}`}</option>;
         })}
       </select>
-      <label htmlFor="country">country</label>
-      <input
-        id="country"
-        name="country"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.country}
-      />
-      <label htmlFor="city">city</label>
-      <input
-        id="city"
-        name="city"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.city}
-      />
-      <label htmlFor="ships">ships?</label>
-      <input
-        id="ships"
-        name="ships"
-        type="checkbox"
-        onChange={formik.handleChange}
-        value={formik.values.ships}
-      />
-      <label htmlFor="intShipping">ships internationally?</label>
-      <input
-        id="intShipping"
-        name="intShipping"
-        type="checkbox"
-        onChange={formik.handleChange}
-        value={formik.values.intShipping}
-      />
-      <label htmlFor="paidShipping">paid shipping?</label>
-      <input
-        id="paidShipping"
-        name="paidShipping"
-        type="checkbox"
-        onChange={formik.handleChange}
-        value={formik.values.paidShipping}
-      />
-      <button type="submit">Submit</button>
+      <label htmlFor='country'>country</label>
+      <input name='country' {...formik.getFieldProps('country')} />
+      <label htmlFor='city'>city</label>
+      <input name='city' {...formik.getFieldProps('city')} />
+      <label htmlFor='ships'>ships?</label>
+      <input name='ships' {...formik.getFieldProps('ships')} type='checkbox' />
+      <label htmlFor='intShipping'>ships internationally?</label>
+      <input name='intShipping' {...formik.getFieldProps('intShipping')} type='checkbox' />
+      <label htmlFor='paidShipping'>paid shipping?</label>
+      <input name='paidShipping' {...formik.getFieldProps('paidShipping')} type='checkbox' />
+      <button type='submit'>Submit</button>
     </form>
   );
 };
