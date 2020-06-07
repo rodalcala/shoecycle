@@ -41,10 +41,10 @@ type Query {
 }
 
 type Mutation {
-  addShoe(shoe: ShoeInput): ShoeUpdateResponse!
+  addShoe(shoe: ShoeInput): CreateUpdateResponse!
 }
 
-type ShoeUpdateResponse {
+type CreateUpdateResponse {
   success: Boolean!
   message: String
   shoe: Shoe!

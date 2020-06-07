@@ -2,9 +2,10 @@ import Shoes from './shoes';
 
 const resolvers = {
   Query: {
-    shoes() {
+    async shoes() {
       try {
-        return [];
+        const allShoes = await Shoes.find();
+        return allShoes;
       } catch (e) {
         console.log('shoes query error:', e);
       }
@@ -17,11 +18,16 @@ const resolvers = {
         const newShoe = await Shoes.create(shoe);
         return {
           success: true,
-          message: 'tuvieja',
+          message: 'shoe_creation_success',
           shoe: newShoe,
         };
       } catch (e) {
         console.log('addShoe mutation error:', e);
+        return {
+          success: false,
+          message: 'shoe_creation_failure',
+          shoe: null,
+        };
       }
     },
   },

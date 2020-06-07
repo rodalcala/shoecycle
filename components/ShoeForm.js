@@ -56,7 +56,11 @@ const ShoeForm = () => {
         .required('Required'),
     }),
     onSubmit: (values, options) => {
-      console.log(values, options);
+      addShoe({
+        variables: {
+          shoe: values
+        }
+      });
     },
   });
 
