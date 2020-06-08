@@ -19,9 +19,9 @@ const ShoesSchema = new Schema({
     type: String,
     required: true,
   },
-  isMaleShoe: {
+  isFemaleShoe: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   isTrailShoe: {
     type: Boolean,

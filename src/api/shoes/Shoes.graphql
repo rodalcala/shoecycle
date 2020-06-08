@@ -4,7 +4,7 @@ type Shoe {
   verifiedEmail: Boolean!
   brand: String!
   model: String!
-  isMaleShoe: Boolean!
+  isFemaleShoe: Boolean!
   isTrailShoe: Boolean!
   size: Float!
   kilometers: Float!
@@ -19,10 +19,9 @@ type Shoe {
 
 input ShoeInput {
   email: String!
-  verifiedEmail: Boolean
   brand: String!
   model: String!
-  isMaleShoe: Boolean
+  isFemaleShoe: Boolean
   isTrailShoe: Boolean
   size: Float!
   kilometers: Float!
@@ -41,10 +40,10 @@ type Query {
 }
 
 type Mutation {
-  addShoe(shoe: ShoeInput): ShoeUpdateResponse!
+  addShoe(shoe: ShoeInput): CreateShoeResponse!
 }
 
-type ShoeUpdateResponse {
+type CreateShoeResponse {
   success: Boolean!
   message: String
   shoe: Shoe!
