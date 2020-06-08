@@ -68,18 +68,26 @@ const ShoeForm = () => {
     },
   });
 
+  const _renderError = (id) => formik.touched[id] && formik.errors[id]
+    ? <div>{formik.errors[id]}</div>
+    : null;
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor='email'>e-mail address</label>
       <input name='email' {...formik.getFieldProps('email')} />
+      {_renderError('email')}
       <label htmlFor='brand'>brand</label>
       <input name='brand' {...formik.getFieldProps('brand')} />
+      {_renderError('brand')}
       <label htmlFor='model'>model</label>
       <input name='model' {...formik.getFieldProps('model')} />
+      {_renderError('model')}
       <label htmlFor='size'>size</label>
       <select id='size' {...formik.getFieldProps('size')}>
         {sizeOptions.map(size => <option key={size} value={size}>{size}</option>)}
       </select>
+      {_renderError('size')}
       <label htmlFor='isFemaleShoe'>female</label>
       <input name='isFemaleShoe' {...formik.getFieldProps('isFemaleShoe')} type='checkbox' />
       <label htmlFor='isTrailShoe'>trail shoe</label>
@@ -92,8 +100,10 @@ const ShoeForm = () => {
           return <option key={kilometers} value={kilometers}>{`<${kilometers}`}</option>;
         })}
       </select>
+      {_renderError('kilometers')}
       <label htmlFor='country'>country</label>
       <input name='country' {...formik.getFieldProps('country')} />
+      {_renderError('country')}
       <label htmlFor='city'>city</label>
       <input name='city' {...formik.getFieldProps('city')} />
       <label htmlFor='ships'>ships?</label>
