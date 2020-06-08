@@ -37,23 +37,12 @@ const ShoeForm = () => {
       paidShipping: true,
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
-      brand: Yup.string()
-        .required('Required'),
-      model: Yup.string()
-        .required('Required'),
-      country: Yup.string()
-        .required('Required'),
-      size: Yup.number()
-        .min(6, 'Size must be 6 or bigger')
-        .max(13, 'Size must be 13 or smaller')
-        .required('Required'),
-      kilometers: Yup.number()
-        .min(0, 'Your shoes cannot have less than 0kms, can they?')
-        .max(200, 'We only accept shoes with less than 200kms')
-        .required('Required'),
+      email: Yup.string().email('Invalid email address').required('Required'),
+      brand: Yup.string().required('Required'),
+      model: Yup.string().required('Required'),
+      country: Yup.string().required('Required'),
+      size: Yup.number().required('Required'),
+      kilometers: Yup.number().required('Required'),
     }),
     onSubmit: (values) => {
       addShoe({
@@ -74,24 +63,31 @@ const ShoeForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+
       <label htmlFor='email'>e-mail address</label>
       <input name='email' {...formik.getFieldProps('email')} />
       {_renderError('email')}
+
       <label htmlFor='brand'>brand</label>
       <input name='brand' {...formik.getFieldProps('brand')} />
       {_renderError('brand')}
+
       <label htmlFor='model'>model</label>
       <input name='model' {...formik.getFieldProps('model')} />
       {_renderError('model')}
+
       <label htmlFor='size'>size</label>
       <select id='size' {...formik.getFieldProps('size')}>
         {sizeOptions.map(size => <option key={size} value={size}>{size}</option>)}
       </select>
       {_renderError('size')}
+
       <label htmlFor='isFemaleShoe'>female</label>
       <input name='isFemaleShoe' {...formik.getFieldProps('isFemaleShoe')} type='checkbox' />
+
       <label htmlFor='isTrailShoe'>trail shoe</label>
       <input name='isTrailShoe' {...formik.getFieldProps('isTrailShoe')} type='checkbox' />
+
       <label htmlFor='kilometers'>kilometers</label>
       <select name='kilometers' {...formik.getFieldProps('kilometers')}>
         {kilometersOptions.map(kilometers => {
@@ -101,18 +97,25 @@ const ShoeForm = () => {
         })}
       </select>
       {_renderError('kilometers')}
+
       <label htmlFor='country'>country</label>
       <input name='country' {...formik.getFieldProps('country')} />
       {_renderError('country')}
+
       <label htmlFor='city'>city</label>
       <input name='city' {...formik.getFieldProps('city')} />
+
       <label htmlFor='ships'>ships?</label>
       <input name='ships' {...formik.getFieldProps('ships')} type='checkbox' />
+
       <label htmlFor='intShipping'>ships internationally?</label>
       <input name='intShipping' {...formik.getFieldProps('intShipping')} type='checkbox' />
+
       <label htmlFor='paidShipping'>paid shipping?</label>
       <input name='paidShipping' {...formik.getFieldProps('paidShipping')} type='checkbox' />
+
       <button type='submit'>Submit</button>
+
     </form>
   );
 };
