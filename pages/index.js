@@ -1,6 +1,12 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import Layout from './../components/Layout';
+import Button from './../components/Button';
+
+const Title = styled.h1`
+  
+`
 
 const Home = () => {
   return (
