@@ -13,11 +13,11 @@ const Button = styled.button`
   box-shadow: 0px 10px 10px -15px #111;
   cursor: pointer;
   &:hover {
-    background-color: rgb(230, 230, 230, 0.25);
-  }
-  &:active {
     transform: translateY(1px);
     filter: saturate(150%);
+  }
+  &:active {
+    background-color: rgb(230, 230, 230, 0.25);
   }
 `;
 
