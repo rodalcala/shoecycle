@@ -1,15 +1,9 @@
 import Head from 'next/head';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto;
-`;
-
 const Main = styled.main`
-  background-color: ${({ theme }) => theme.colours.primary};
-  color: ${({ theme }) => theme.colours.white};
+  background-color: ${props => props.theme.colours.primary};
+  color: ${props => props.theme.colours.white};
   text-align: center;
 `;
 
@@ -23,9 +17,7 @@ const Layout = ({ children }) => (
         rel="stylesheet"
       />
     </Head>
-    <Main>
-      <Container>{children}</Container>
-    </Main>
+    <Main>{children}</Main>
   </div>
 );
 

@@ -1,44 +1,39 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import Layout from './../components/Layout';
-import Button from './../components/Button';
+import Layout from '../components/Layout';
+import Container from '../components/styled/Container';
+import Button from '../components/styled/Button';
 
-const Title = styled.h1`
-  font-size: 4rem;
-  padding: 1em 0;
-`;
-
-const Description = styled.p`
-  width: 80%;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  padding-bottom: 2.5em;
+const Section = styled.section`
+  padding: 3em 0;
+  background-color: ${(props) =>
+    props.secondary ? props.theme.colours.secondary : null};
 `;
 
 const Home = () => {
   return (
     <Layout>
-      <Title>shoecycle</Title>
-      <Description>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam.
-      </Description>
-      <div>
-        <ul>
-          <li>
-            <Link href="/giver">
-              <a>Giving</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/receiver">
-              <a>Receiving</a>
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <Section>
+        <Container>
+          <h1>shoecycle</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </Container>
+      </Section>
+      <Section secondary>
+        <Container>
+          <Link href="/giver">
+            <Button primary>Giving</Button>
+          </Link>
+          <Link href="/receiver">
+            <Button>Receiving</Button>
+          </Link>
+        </Container>
+      </Section>
     </Layout>
   );
 };
