@@ -11,6 +11,12 @@ const Container = styled.div`
     color: ${(props) => props.theme.colours.secondary};
   }
 
+  > h2 {
+    font-size: 2.5rem;
+    padding-bottom: 1em;
+    color: ${(props) => props.theme.colours.secondary};
+  }
+
   > p {
     width: 80%;
     margin: 0 auto;

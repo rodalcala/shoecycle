@@ -34,6 +34,16 @@ const Home = () => {
           </Link>
         </Container>
       </Section>
+      <Section>
+        <Container>
+          <h2>about us</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam.
+          </p>
+        </Container>
+      </Section>
     </Layout>
   );
 };
