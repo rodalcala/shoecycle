@@ -34,7 +34,7 @@ input ShoeInput {
 }
 
 type Query {
-  shoes: [Shoe]
+  getAllShoes: [Shoe]
   shoeById(id: ID): Shoe
   shoeByBrand(brand: String): [Shoe]
 }

@@ -2,9 +2,9 @@ import Shoes from './shoes';
 
 const resolvers = {
   Query: {
-    async shoes() {
+    async getAllShoes() {
       try {
-        const allShoes = await Shoes.find();
+        const allShoes = await Shoes.find({});
         return allShoes;
       } catch (e) {
         console.log('shoes query error:', e);
