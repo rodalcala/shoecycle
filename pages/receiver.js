@@ -8,8 +8,8 @@ import Container from '../components/styled/Container';
 import Button from '../components/styled/Button';
 
 const GET_SHOES = gql`
-  query {
-    getAllShoes {
+  query getAllShoes {
+    shoes {
       _id
       email
       verifiedEmail

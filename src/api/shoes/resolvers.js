@@ -2,7 +2,7 @@ import Shoes from './shoes';
 
 const resolvers = {
   Query: {
-    async getAllShoes() {
+    async shoes() {
       try {
         const allShoes = await Shoes.find({});
         return allShoes;

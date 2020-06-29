@@ -34,9 +34,9 @@ input ShoeInput {
 }
 
 type Query {
-  getAllShoes: [Shoe]
+  shoes: [Shoe]
+  shoesByBrand(brand: String): [Shoe]
   shoeById(id: ID): Shoe
-  shoeByBrand(brand: String): [Shoe]
 }
 
 type Mutation {
