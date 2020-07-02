@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <Layout>
       <Section>
-        <Container>
+        <Container main>
           <h1>shoecycle</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

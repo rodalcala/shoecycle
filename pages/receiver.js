@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 import { withApollo } from './../lib/apollo';
 
 import Layout from '../components/Layout';
 import ShoeList from '../components/ShoeList';
 import Container from '../components/styled/Container';
-import Button from '../components/styled/Button';
 
 const GET_ALL_SHOES = gql`
   query getAllShoes {
@@ -31,25 +31,25 @@ const GET_ALL_SHOES = gql`
   }
 `;
 
+const Header = styled.section`
+  padding: 3em 0;
+  margin: 0;
+`;
+
 const Receiver = () => {
   const { data, loading, error } = useQuery(GET_ALL_SHOES);
-  const retrieveShoes = () => {
-    console.log('Retrieving shoes from MongoDB');
-    console.log('data', data);
-    console.log('loading', loading);
-    console.log('error', error);
-  };
 
   if (loading || error) return null;
 
   return (
     <Layout>
-      <Container>
-        <Button primary onClick={retrieveShoes}>
-          Receive shoes
-        </Button>
-        <ShoeList shoesArray={data.shoes} />
-      </Container>
+      <Header>
+        <Container>
+          <h1>shoecycle</h1>
+          <h3>AVAILABLE SHOES</h3>
+        </Container>
+      </Header>
+      <ShoeList shoesArray={data.shoes} />
     </Layout>
   );
 };
