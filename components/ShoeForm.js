@@ -1,26 +1,10 @@
-import { useMutation } from '@apollo/react-hooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import gql from 'graphql-tag';
-
-const ADD_SHOE = gql`
-  mutation addShoe($shoe: ShoeInput) {
-    addShoe(shoe: $shoe) {
-      success
-      message
-      shoe {
-        _id
-      }
-    }
-  }
-`;
 
 const sizeOptions = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13];
 const kilometersOptions = [0, 5, 10, 15, 20, 30, 40, 50, 70, 90, 120, 150, 199, 200];
 
-const ShoeForm = () => {
-  const [addShoe] = useMutation(ADD_SHOE);
-
+const ShoeForm = ({ addShoe }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
