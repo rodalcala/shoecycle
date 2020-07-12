@@ -92,7 +92,7 @@ const ShoeForm = () => {
       <select name='kilometers' {...formik.getFieldProps('kilometers')}>
         {kilometersOptions.map(kilometers => {
           if (kilometers === 0) return <option key={kilometers} value={kilometers}>new</option>
-          if (kilometers === 200) return <option key={kilometers} value={kilometers}>>{kilometers}</option>
+          if (kilometers === 200) return <option key={kilometers} value={kilometers}>{`>${kilometers}`}</option>
           return <option key={kilometers} value={kilometers}>{`<${kilometers}`}</option>;
         })}
       </select>
