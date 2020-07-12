@@ -4,7 +4,7 @@ const resolvers = {
   Query: {
     async shoes() {
       try {
-        const allShoes = await Shoes.find();
+        const allShoes = await Shoes.find({});
         return allShoes;
       } catch (e) {
         console.log('shoes query error:', e);
