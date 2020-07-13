@@ -31,7 +31,7 @@ const GET_ALL_SHOES = gql`
   }
 `;
 
-const Header = styled.section`
+const Header = styled.header`
   padding: 3em 0;
   margin: 0;
 `;
