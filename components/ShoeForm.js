@@ -43,11 +43,23 @@ const Form = styled.form`
   align-items: flex-start;
 `;
 
-const Field = styled.div``;
+const Field = styled.div`
+  margin-bottom: 0.6em;
+
+  > input {
+    vertical-align: middle;
+  }
+
+  > label {
+    vertical-align: middle;
+    margin-left: 0.2em;
+  }
+`;
 
 const ShoeForm = ({ addShoe }) => {
   const formik = useFormik({
     initialValues: {
+      name: '',
       email: '',
       brand: '',
       model: '',
@@ -91,7 +103,16 @@ const ShoeForm = ({ addShoe }) => {
     <Form onSubmit={formik.handleSubmit}>
       <Field>
         <input
-          placeholder="address"
+          placeholder="how would you like to be called?"
+          name="name"
+          {...formik.getFieldProps('name')}
+        />
+        {_renderError('name')}
+      </Field>
+
+      <Field>
+        <input
+          placeholder="email"
           name="email"
           {...formik.getFieldProps('email')}
         />
