@@ -37,7 +37,8 @@ const kilometersOptions = [
 ];
 
 const Form = styled.form`
-  margin: 0 2em;
+  margin: 0 auto;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -47,7 +48,55 @@ const Field = styled.div`
   margin-bottom: 0.6em;
 
   > input {
+    padding: 0.3em;
     vertical-align: middle;
+    border: none;
+    border-radius: 0.1em;
+    background-color: ${(props) => props.theme.colours.white};
+  }
+
+  > input:focus {
+    outline: none;
+    outline-offset: none;
+    -moz-box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
+    -webkit-box-shadow: inset 0 0 0.3em
+      ${(props) => props.theme.colours.primary};
+    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
+  }
+
+  > input[type='text'] {
+    width: 18em;
+    max-width: 65vw;
+  }
+
+  > input[type='checkbox'] {
+    -webkit-appearance: none;
+    width: 0.9em;
+    height: 0.9em;
+    background-color: ${(props) => props.theme.colours.white};
+    border-radius: 0.2em;
+    margin-right: 0.1em;
+  }
+
+  > input[type='checkbox']:checked {
+    background: ${(props) => props.theme.colours.secondary};
+  }
+
+  > select {
+    padding: 0.15em;
+    border: none;
+    border-radius: 0.1em;
+    background-color: ${(props) => props.theme.colours.white};
+    margin-right: 0.2em;
+  }
+
+  > select:focus {
+    outline: none;
+    outline-offset: none;
+    -moz-box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
+    -webkit-box-shadow: inset 0 0 0.3em
+      ${(props) => props.theme.colours.primary};
+    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
   }
 
   > label {
@@ -74,7 +123,9 @@ const ShoeForm = ({ addShoe }) => {
       paidShipping: true,
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Required'),
       brand: Yup.string().required('Required'),
       model: Yup.string().required('Required'),
       country: Yup.string().required('Required'),
@@ -106,6 +157,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="how would you like to be called?"
           name="name"
           {...formik.getFieldProps('name')}
+          type="text"
         />
         {_renderError('name')}
       </Field>
@@ -115,6 +167,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="email"
           name="email"
           {...formik.getFieldProps('email')}
+          type="text"
         />
         {_renderError('email')}
       </Field>
@@ -124,6 +177,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="brand"
           name="brand"
           {...formik.getFieldProps('brand')}
+          type="text"
         />
         {_renderError('brand')}
       </Field>
@@ -133,6 +187,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="model"
           name="model"
           {...formik.getFieldProps('model')}
+          type="text"
         />
         {_renderError('model')}
       </Field>
@@ -198,6 +253,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="country"
           name="country"
           {...formik.getFieldProps('country')}
+          type="text"
         />
         {_renderError('country')}
       </Field>
@@ -207,6 +263,7 @@ const ShoeForm = ({ addShoe }) => {
           placeholder="city"
           name="city"
           {...formik.getFieldProps('city')}
+          type="text"
         />
       </Field>
 

@@ -33,7 +33,7 @@ const Giver = () => {
       <Header>
         <Container>
           <h1>shoecycle</h1>
-          <h3>AVAILABLE SHOES</h3>
+          <h3>RECYCLE SHOES</h3>
         </Container>
       </Header>
       <ShoeForm addShoe={addShoe} />
