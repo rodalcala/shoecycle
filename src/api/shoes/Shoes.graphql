@@ -1,5 +1,6 @@
 type Shoe {
   _id: ID!
+  ownerName: String!
   email: String!
   verifiedEmail: Boolean!
   brand: String!
@@ -18,6 +19,7 @@ type Shoe {
 }
 
 input ShoeInput {
+  ownerName: String!
   email: String!
   brand: String!
   model: String!

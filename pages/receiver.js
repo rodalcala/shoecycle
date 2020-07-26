@@ -13,6 +13,7 @@ const GET_ALL_SHOES = gql`
   query getAllShoes {
     shoes {
       _id
+      ownerName
       email
       verifiedEmail
       brand
