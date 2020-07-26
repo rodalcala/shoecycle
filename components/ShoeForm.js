@@ -84,6 +84,10 @@ const Field = styled.div`
     background: ${(props) => props.theme.colours.secondary};
   }
 
+  > input[type='checkbox']:disabled {
+    background-color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
+  }
+
   > select {
     padding: 0.15em;
     border: none;
@@ -104,6 +108,7 @@ const Field = styled.div`
   > label {
     vertical-align: middle;
     margin-left: 0.2em;
+    color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
   }
 `;
 
@@ -120,9 +125,9 @@ const ShoeForm = ({ addShoe }) => {
       kilometers: 0,
       country: '',
       city: '',
-      ships: true,
-      intShipping: true,
-      paidShipping: true,
+      ships: false,
+      intShipping: false,
+      paidShipping: false,
     },
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),
@@ -133,6 +138,12 @@ const ShoeForm = ({ addShoe }) => {
       kilometers: Yup.number().required('Required'),
     }),
     onSubmit: (values) => {
+      /* NOTE: Clear fields dependent on shipping if it got unchecked */
+      if (!values.ships) {
+        values.intShipping = false;
+        values.paidShipping = false;
+      }
+
       addShoe({
         variables: {
           shoe: {
@@ -276,20 +287,22 @@ const ShoeForm = ({ addShoe }) => {
         <label htmlFor="ships">ships?</label>
       </Field>
 
-      <Field>
+      <Field disabled={!formik.values.ships}>
         <input
           name="intShipping"
           {...formik.getFieldProps('intShipping')}
           type="checkbox"
+          disabled={!formik.values.ships}
         />
         <label htmlFor="intShipping">ships internationally?</label>
       </Field>
 
-      <Field>
+      <Field disabled={!formik.values.ships}>
         <input
           name="paidShipping"
           {...formik.getFieldProps('paidShipping')}
           type="checkbox"
+          disabled={!formik.values.ships}
         />
         <label htmlFor="paidShipping">paid shipping?</label>
       </Field>
