@@ -1,6 +1,7 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
 
 import { withApollo } from './../lib/apollo';
 
@@ -45,7 +46,9 @@ const Receiver = () => {
     <Layout>
       <Header>
         <Container>
-          <h1>shoecycle</h1>
+          <Link href="/">
+            <h1>shoecycle</h1>
+          </Link>
           <h3>AVAILABLE SHOES</h3>
         </Container>
       </Header>

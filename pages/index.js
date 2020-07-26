@@ -16,7 +16,9 @@ const Home = () => {
     <Layout>
       <Section>
         <Container main>
-          <h1>shoecycle</h1>
+          <Link href="/">
+            <h1>shoecycle</h1>
+          </Link>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

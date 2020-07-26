@@ -1,6 +1,7 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
 
 import { withApollo } from './../lib/apollo';
 
@@ -32,8 +33,10 @@ const Giver = () => {
     <Layout>
       <Header>
         <Container>
-          <h1>shoecycle</h1>
-          <h3>RECYCLE SHOES</h3>
+          <Link href="/">
+            <h1>shoecycle</h1>
+          </Link>
+          <h3>RECYCLE UR SHOES</h3>
         </Container>
       </Header>
       <ShoeForm addShoe={addShoe} />
