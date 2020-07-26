@@ -115,7 +115,7 @@ const Field = styled.div`
 const ShoeForm = ({ addShoe }) => {
   const formik = useFormik({
     initialValues: {
-      name: '',
+      ownerName: '',
       email: '',
       brand: '',
       model: '',
@@ -166,11 +166,11 @@ const ShoeForm = ({ addShoe }) => {
       <Field>
         <input
           placeholder="how would you like to be called?"
-          name="name"
-          {...formik.getFieldProps('name')}
+          name="ownerName"
+          {...formik.getFieldProps('ownerName')}
           type="text"
         />
-        {_renderError('name')}
+        {_renderError('ownerName')}
       </Field>
 
       <Field>

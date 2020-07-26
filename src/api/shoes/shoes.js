@@ -2,6 +2,10 @@
 import mongoose, { Schema } from 'mongoose';
 
 const ShoesSchema = new Schema({
+  ownerName: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
