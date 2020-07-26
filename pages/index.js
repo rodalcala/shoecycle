@@ -27,10 +27,10 @@ const Home = () => {
       <Section secondary>
         <Container>
           <Link href="/giver">
-            <Button primary>Giving</Button>
+            <Button margin="1em" primary>Giving</Button>
           </Link>
           <Link href="/receiver">
-            <Button>Receiving</Button>
+            <Button margin="1em">Receiving</Button>
           </Link>
         </Container>
       </Section>

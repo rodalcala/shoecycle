@@ -2,6 +2,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 
+import Button from './styled/Button';
+
 const sizeOptions = [
   6,
   6.5,
@@ -58,10 +60,10 @@ const Field = styled.div`
   > input:focus {
     outline: none;
     outline-offset: none;
+    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
     -moz-box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
     -webkit-box-shadow: inset 0 0 0.3em
       ${(props) => props.theme.colours.primary};
-    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
   }
 
   > input[type='text'] {
@@ -93,10 +95,10 @@ const Field = styled.div`
   > select:focus {
     outline: none;
     outline-offset: none;
+    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
     -moz-box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
     -webkit-box-shadow: inset 0 0 0.3em
       ${(props) => props.theme.colours.primary};
-    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
   }
 
   > label {
@@ -123,9 +125,7 @@ const ShoeForm = ({ addShoe }) => {
       paidShipping: true,
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
+      email: Yup.string().email('Invalid email address').required('Required'),
       brand: Yup.string().required('Required'),
       model: Yup.string().required('Required'),
       country: Yup.string().required('Required'),
@@ -295,7 +295,9 @@ const ShoeForm = ({ addShoe }) => {
       </Field>
 
       <Field>
-        <button type="submit">Submit</button>
+        <Button type="submit" margin="1em 0" primary>
+          Submit
+        </Button>
       </Field>
     </Form>
   );
