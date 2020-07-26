@@ -7,9 +7,9 @@ const Container = styled.div`
 
   > h1 {
     font-size: 4rem;
-    padding-bottom: ${(props) => props.main && '1em'};
     text-align: ${(props) => !props.main && 'left'};
     color: ${(props) => props.theme.colours.secondary};
+    cursor: pointer;
   }
 
   > h2 {
@@ -24,6 +24,7 @@ const Container = styled.div`
   }
 
   > p {
+    padding-top: ${(props) => props.main && '3em'};
     width: 80%;
     margin: 0 auto;
     font-size: 1.1rem;

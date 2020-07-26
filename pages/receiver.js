@@ -1,6 +1,7 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
 
 import { withApollo } from './../lib/apollo';
 
@@ -31,7 +32,7 @@ const GET_ALL_SHOES = gql`
   }
 `;
 
-const Header = styled.section`
+const Header = styled.header`
   padding: 3em 0;
   margin: 0;
 `;
@@ -45,7 +46,9 @@ const Receiver = () => {
     <Layout>
       <Header>
         <Container>
-          <h1>shoecycle</h1>
+          <Link href="/">
+            <h1>shoecycle</h1>
+          </Link>
           <h3>AVAILABLE SHOES</h3>
         </Container>
       </Header>

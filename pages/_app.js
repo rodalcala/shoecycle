@@ -8,7 +8,8 @@ const theme = {
   colours: {
     primary: '#1E46DC',
     secondary: '#00FA32',
-    white: '#FFFFFF'
+    white: '#FFFFFF',
+    disabled: '#B8B8B8'
   },
 }
 

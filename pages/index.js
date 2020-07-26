@@ -16,7 +16,9 @@ const Home = () => {
     <Layout>
       <Section>
         <Container main>
-          <h1>shoecycle</h1>
+          <Link href="/">
+            <h1>shoecycle</h1>
+          </Link>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -27,10 +29,10 @@ const Home = () => {
       <Section secondary>
         <Container>
           <Link href="/giver">
-            <Button primary>Giving</Button>
+            <Button margin="1em" primary>Giving</Button>
           </Link>
           <Link href="/receiver">
-            <Button>Receiving</Button>
+            <Button margin="1em">Receiving</Button>
           </Link>
         </Container>
       </Section>
