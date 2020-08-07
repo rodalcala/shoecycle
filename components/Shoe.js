@@ -54,21 +54,34 @@ const SecondaryData = styled.div`
   }
 `;
 
-const Shoe = ({ shoe }) => (
-  <ShoeBox>
-    <MainData>
-      <h1>{shoe.brand}</h1>
-      <h2>{shoe.size}</h2>
-    </MainData>
-    <SecondaryData>
-      <div>
-        <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
-        <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
-      </div>
-      {/* HARD-CODED: Green value. Should check kms and render some visualisation of them. */}
-      <h3>🟢</h3>
-    </SecondaryData>
-  </ShoeBox>
-);
+const Shoe = ({ shoe }) => {
+  const _renderUsage = () => {
+    if (shoe.kilometers === 0) {
+      return 'NEW ✅';
+    } else if (shoe.kilometers < 50) {
+      return 'PRETTY NEW 🟢';
+    } else if (shoe.kilometers < 120) {
+      return 'KINDA USED 🟡';
+    } else {
+      return 'QUITE USED 🔴';
+    }
+  };
 
+  return (
+    <ShoeBox>
+      <MainData>
+        <h1>{shoe.brand}</h1>
+        <h2>{shoe.size}</h2>
+      </MainData>
+      <SecondaryData>
+        <div>
+          <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
+          <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
+        </div>
+        {/* HARD-CODED: Green value. Should check kms and render some visualisation of them. */}
+        <h3>{_renderUsage()}</h3>
+      </SecondaryData>
+    </ShoeBox>
+  );
+};
 export default Shoe;
