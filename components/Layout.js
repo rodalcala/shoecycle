@@ -5,6 +5,7 @@ const Main = styled.main`
   background-color: ${props => props.theme.colours.primary};
   color: ${props => props.theme.colours.white};
   text-align: center;
+  min-height: 100vh;
 `;
 
 const Layout = ({ children }) => (
