@@ -80,7 +80,6 @@ const Shoe = ({ shoe }) => {
           <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
           <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
         </div>
-        {/* HARD-CODED: Green value. Should check kms and render some visualisation of them. */}
         <h3>{_renderUsage()}</h3>
       </SecondaryData>
     </ShoeBox>

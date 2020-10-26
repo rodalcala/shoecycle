@@ -8,6 +8,7 @@ import { withApollo } from '../../lib/apollo';
 
 import Layout from '../../components/Layout';
 import Container from '../../components/styled/Container';
+import Header from '../../components/styled/Header';
 
 const GET_SHOE_BY_ID = gql`
   query getShoeById($id: ID) {
@@ -33,9 +34,12 @@ const GET_SHOE_BY_ID = gql`
   }
 `;
 
-const Header = styled.header`
-  padding: 3em 0;
-  margin: 0;
+const DetailsContainer = styled.div`
+  > img {
+    max-width: 85%;
+    object-fit: scale-down;
+    overflow: hidden;
+  }
 `;
 
 const ShoeDetailedView = () => {

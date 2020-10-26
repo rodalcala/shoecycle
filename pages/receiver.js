@@ -8,6 +8,7 @@ import { withApollo } from './../lib/apollo';
 import Layout from '../components/Layout';
 import ShoeList from '../components/ShoeList';
 import Container from '../components/styled/Container';
+import Header from '../components/styled/Header';
 
 const GET_ALL_SHOES = gql`
   query getAllShoes {
@@ -31,11 +32,6 @@ const GET_ALL_SHOES = gql`
       paidShipping
     }
   }
-`;
-
-const Header = styled.header`
-  padding: 3em 0;
-  margin: 0;
 `;
 
 const Receiver = () => {
