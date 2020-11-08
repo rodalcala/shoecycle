@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   font-size: ${(props) => (props.primary ? '2em' : '1.2em')};
-  margin: ${(props) => (props.margin || 0)};
+  margin: ${(props) => props.margin || 0};
   padding: 0.25em 1em;
   border-radius: 3px;
   color: ${(props) =>
@@ -10,6 +10,24 @@ const Button = styled.button`
   border: 2px solid;
   box-shadow: 0px 10px 10px -15px #111;
   cursor: pointer;
+
+  ${(props) =>
+    props.square &&
+    css`
+      padding: 0;
+      width: 40%;
+      height: 0;
+      padding-bottom: 40%;
+      position: relative;
+
+      > a {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: white;
+        transform: translate(-50%, -50%)
+      }
+    `}
 
   &:hover {
     transform: translateY(1px);

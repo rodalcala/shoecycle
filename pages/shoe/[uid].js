@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import { withApollo } from '../../lib/apollo';
 
 import Layout from '../../components/Layout';
+import Button from '../../components/styled/Button';
 import Container from '../../components/styled/Container';
 import Header from '../../components/styled/Header';
 
@@ -37,6 +38,7 @@ const GET_SHOE_BY_ID = gql`
 const SpecificationContainer = styled.div`
   position: relative;
   margin: 0.4rem;
+  overflow: hidden;
   font-size: ${(props) => `${props.size}em` || '1em'};
 
   > h1 {
@@ -118,6 +120,9 @@ const ShoeDetailedView = () => {
               <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
             </SpecificationContainer>
           </div>
+          <Button primary square margin={'.1em'}>
+            <a>I WANT IT</a>
+          </Button>
           <SpecificationContainer size={2.5}>
             <h4>size</h4>
             <h1>{size}</h1>
