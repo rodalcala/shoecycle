@@ -17,9 +17,9 @@ const Button = styled.button`
       padding: 0;
       width: 40vw;
       height: 40vw;
-      max-width: 280px;
+      max-width: 180px;
       min-width: 80px;
-      max-height: 280px;
+      max-height: 180px;
       min-height: 80px;
       position: relative;
 

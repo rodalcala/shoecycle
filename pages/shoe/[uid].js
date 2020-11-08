@@ -120,7 +120,7 @@ const ShoeDetailedView = () => {
               <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
             </SpecificationContainer>
           </div>
-          <Button primary square margin={'.1em'}>
+          <Button primary square margin={'.2em'}>
             <a>I WANT IT</a>
           </Button>
           <SpecificationContainer size={2.5}>
