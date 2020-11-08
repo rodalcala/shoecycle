@@ -15,16 +15,18 @@ const Button = styled.button`
     props.square &&
     css`
       padding: 0;
-      width: 40%;
-      height: 0;
-      padding-bottom: 40%;
+      width: 40vw;
+      height: 40vw;
+      max-width: 280px;
+      min-width: 80px;
+      max-height: 280px;
+      min-height: 80px;
       position: relative;
 
       > a {
         position: absolute;
         top: 50%;
         left: 50%;
-        color: white;
         transform: translate(-50%, -50%)
       }
     `}
