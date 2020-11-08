@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const ShoeBox = styled.div`
@@ -68,6 +69,7 @@ const Shoe = ({ shoe }) => {
   };
 
   return (
+    <Link href={`/shoe/${shoe._id}`}>
     <ShoeBox>
       <MainData>
         <h1>{shoe.brand}</h1>
@@ -78,10 +80,10 @@ const Shoe = ({ shoe }) => {
           <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
           <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
         </div>
-        {/* HARD-CODED: Green value. Should check kms and render some visualisation of them. */}
         <h3>{_renderUsage()}</h3>
       </SecondaryData>
     </ShoeBox>
+    </Link>
   );
 };
 export default Shoe;

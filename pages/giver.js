@@ -8,6 +8,7 @@ import { withApollo } from './../lib/apollo';
 import Layout from '../components/Layout';
 import ShoeForm from './../components/ShoeForm';
 import Container from '../components/styled/Container';
+import Header from '../components/styled/Header';
 
 const ADD_SHOE = gql`
   mutation addShoe($shoe: ShoeInput) {
@@ -19,11 +20,6 @@ const ADD_SHOE = gql`
       }
     }
   }
-`;
-
-const Header = styled.header`
-  padding: 3em 0;
-  margin: 0;
 `;
 
 const Giver = () => {

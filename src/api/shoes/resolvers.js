@@ -10,6 +10,14 @@ const resolvers = {
         console.log('shoes query error:', e);
       }
     },
+    async shoeById(_, { id }) {
+      try {
+        const [ shoe ] = await Shoes.find({ _id: id });
+        return shoe;
+      } catch (e) {
+        console.log('shoeById query error:', e);
+      }
+    },
   },
 
   Mutation: {
