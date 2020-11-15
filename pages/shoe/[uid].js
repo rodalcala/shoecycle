@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useQuery } from '@apollo/react-hooks';
@@ -10,6 +11,11 @@ import Layout from '../../components/Layout';
 import Button from '../../components/styled/Button';
 import Container from '../../components/styled/Container';
 import Header from '../../components/styled/Header';
+
+const RequestModalWithoutSSR = dynamic(
+  () => import('../../components/RequestModal'),
+  { ssr: false }
+);
 
 const GET_SHOE_BY_ID = gql`
   query getShoeById($id: ID) {
@@ -92,6 +98,7 @@ const ShoeDetailedView = () => {
 
   return (
     <Layout>
+      <RequestModalWithoutSSR />
       <Header>
         <Container>
           <Link href="/">
