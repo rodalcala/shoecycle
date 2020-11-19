@@ -136,7 +136,7 @@ const Field = styled.div`
   margin-bottom: 0.6em;
   width: 100%;
 
-  > input {
+  > input, textarea {
     padding: 0.3em;
     vertical-align: middle;
     border: none;
@@ -146,27 +146,14 @@ const Field = styled.div`
     max-width: 65vw;
   }
 
-  > input:focus {
+  > input:focus, textarea:focus {
     outline: none;
     outline-offset: none;
     box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
   }
 
   > textarea {
-    padding: 0.3em;
-    vertical-align: middle;
-    border: none;
-    border-radius: 0.1em;
-    background-color: ${(props) => props.theme.colours.white};
-    width: 18em;
-    max-width: 65vw;
     height: 10em;
-  }
-
-  > textarea:focus {
-    outline: none;
-    outline-offset: none;
-    box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
   }
 `;
 
