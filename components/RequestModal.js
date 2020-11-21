@@ -23,8 +23,18 @@ const ModalContainer = styled.div`
   max-height: 700px;
   width: 85%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 0.1em;
+`;
+
+const Title = styled.h1`
+  width: 90%;
+  color: ${(props) => props.theme.colours.secondary};
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 1rem 0;
 `;
 
 const RequestModal = () => {
@@ -61,6 +71,7 @@ const RequestModal = () => {
     <ModalPortal>
       <ModalBackground>
         <ModalContainer>
+          <Title>request form</Title>
           <Form onSubmit={formik.handleSubmit}>
             <Field>
               <input
@@ -114,7 +125,7 @@ const RequestModal = () => {
 
             <Field>
               <Button type="submit" margin="1em 0">
-                Submit
+                submit
               </Button>
             </Field>
           </Form>
@@ -136,7 +147,8 @@ const Field = styled.div`
   margin-bottom: 0.6em;
   width: 100%;
 
-  > input, textarea {
+  > input,
+  textarea {
     padding: 0.3em;
     vertical-align: middle;
     border: none;
@@ -146,7 +158,8 @@ const Field = styled.div`
     max-width: 65vw;
   }
 
-  > input:focus, textarea:focus {
+  > input:focus,
+  textarea:focus {
     outline: none;
     outline-offset: none;
     box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};

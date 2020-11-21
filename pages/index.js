@@ -29,10 +29,10 @@ const Home = () => {
       <Section secondary>
         <Container>
           <Link href="/giver">
-            <Button margin="1em" primary>Giving</Button>
+            <Button margin="1em" primary>giving</Button>
           </Link>
           <Link href="/receiver">
-            <Button margin="1em">Receiving</Button>
+            <Button margin="1em">receiving</Button>
           </Link>
         </Container>
       </Section>

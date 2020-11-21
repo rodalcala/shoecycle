@@ -306,7 +306,7 @@ const ShoeForm = ({ addShoe }) => {
 
       <Field>
         <Button type="submit" margin="1em 0" primary>
-          Submit
+          submit
         </Button>
       </Field>
     </Form>
