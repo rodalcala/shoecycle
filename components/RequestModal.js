@@ -29,112 +29,6 @@ const ModalContainer = styled.div`
   border-radius: 0.1em;
 `;
 
-const Title = styled.h1`
-  width: 90%;
-  color: ${(props) => props.theme.colours.secondary};
-  font-size: 2rem;
-  font-weight: 400;
-  margin: 1rem 0;
-`;
-
-const RequestModal = () => {
-  const ModalPortal = usePortal();
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      city: '',
-      country: '',
-      message: '',
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required('Required'),
-      email: Yup.string().email('Invalid email address').required('Required'),
-      country: Yup.string().required('Required'),
-      message: Yup.string().required('Required'),
-    }),
-    // onSubmit: (values) => {
-    //   sendRequestMessage({
-    //     variables: {
-    //       shoe: {
-    //         ...values,
-    //         size: parseFloat(values.size),
-    //         kilometers: parseFloat(values.kilometers),
-    //       },
-    //     },
-    //   });
-    // },
-  });
-
-  return (
-    <ModalPortal>
-      <ModalBackground>
-        <ModalContainer>
-          <Title>request form</Title>
-          <Form onSubmit={formik.handleSubmit}>
-            <Field>
-              <input
-                placeholder="name"
-                name="name"
-                {...formik.getFieldProps('name')}
-                type="text"
-              />
-              {/* {_renderError('name')} */}
-            </Field>
-
-            <Field>
-              <input
-                placeholder="email"
-                name="email"
-                {...formik.getFieldProps('email')}
-                type="text"
-              />
-              {/* {_renderError('email')} */}
-            </Field>
-
-            <Field>
-              <input
-                placeholder="city"
-                name="city"
-                {...formik.getFieldProps('city')}
-                type="text"
-              />
-              {/* {_renderError('city')} */}
-            </Field>
-
-            <Field>
-              <input
-                placeholder="country"
-                name="country"
-                {...formik.getFieldProps('country')}
-                type="text"
-              />
-              {/* {_renderError('country')} */}
-            </Field>
-
-            <Field>
-              <textarea
-                placeholder="let xx know why would you like their shoes"
-                name="message"
-                {...formik.getFieldProps('message')}
-                type="text"
-              />
-              {/* {_renderError('message')} */}
-            </Field>
-
-            <Field>
-              <Button type="submit" margin="1em 0">
-                submit
-              </Button>
-            </Field>
-          </Form>
-        </ModalContainer>
-      </ModalBackground>
-    </ModalPortal>
-  );
-};
-
 const Form = styled.form`
   margin: 0 auto;
   width: 90%;
@@ -169,5 +63,118 @@ const Field = styled.div`
     height: 10em;
   }
 `;
+
+const Title = styled.h1`
+  width: 90%;
+  color: ${(props) => props.theme.colours.secondary};
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 1rem 0;
+`;
+
+const RequestModal = ({ ownerName }) => {
+  const ModalPortal = usePortal();
+
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      city: '',
+      country: '',
+      message: '',
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required('Required'),
+      email: Yup.string().email('Invalid email address').required('Required'),
+      country: Yup.string().required('Required'),
+      message: Yup.string().required('Required'),
+    }),
+    // onSubmit: (values) => {
+    //   sendRequestMessage({
+    //     variables: {
+    //       shoe: {
+    //         ...values,
+    //         size: parseFloat(values.size),
+    //         kilometers: parseFloat(values.kilometers),
+    //       },
+    //     },
+    //   });
+    // },
+  });
+
+  const _renderError = (id) =>
+    formik.touched[id] && formik.errors[id] ? (
+      <div>{formik.errors[id]}</div>
+    ) : null;
+
+  const textPlaceholder = `let ${ownerName} know why would you like their shoes`;
+
+  return (
+    <ModalPortal>
+      <ModalBackground>
+        <ModalContainer>
+          <Title>request form</Title>
+          <Form onSubmit={formik.handleSubmit}>
+            <Field>
+              <input
+                placeholder="name"
+                name="name"
+                {...formik.getFieldProps('name')}
+                type="text"
+              />
+              {_renderError('name')}
+            </Field>
+
+            <Field>
+              <input
+                placeholder="email"
+                name="email"
+                {...formik.getFieldProps('email')}
+                type="text"
+              />
+              {_renderError('email')}
+            </Field>
+
+            <Field>
+              <input
+                placeholder="city"
+                name="city"
+                {...formik.getFieldProps('city')}
+                type="text"
+              />
+              {_renderError('city')}
+            </Field>
+
+            <Field>
+              <input
+                placeholder="country"
+                name="country"
+                {...formik.getFieldProps('country')}
+                type="text"
+              />
+              {_renderError('country')}
+            </Field>
+
+            <Field>
+              <textarea
+                placeholder={textPlaceholder}
+                name="message"
+                {...formik.getFieldProps('message')}
+                type="text"
+              />
+              {_renderError('message')}
+            </Field>
+
+            <Field>
+              <Button type="submit" margin="1em 0">
+                submit
+              </Button>
+            </Field>
+          </Form>
+        </ModalContainer>
+      </ModalBackground>
+    </ModalPortal>
+  );
+};
 
 export default RequestModal;

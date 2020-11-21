@@ -83,6 +83,7 @@ const ShoeDetailedView = () => {
   if (loading || error) return null;
 
   const {
+    ownerName,
     brand,
     model,
     isFemaleShoe,
@@ -98,7 +99,7 @@ const ShoeDetailedView = () => {
 
   return (
     <Layout>
-      <RequestModalWithoutSSR />
+      <RequestModalWithoutSSR ownerName={ownerName} />
       <Header>
         <Container>
           <Link href="/">
