@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import usePortal from '../lib/usePortal';
 import Button from './styled/Button';
@@ -72,7 +72,7 @@ const Title = styled.h1`
   margin: 1rem 0;
 `;
 
-const RequestModal = ({ ownerName }) => {
+const RequestModal = ({ shoe, sendShoeRequest }) => {
   const ModalPortal = usePortal();
 
   const formik = useFormik({
@@ -89,17 +89,14 @@ const RequestModal = ({ ownerName }) => {
       country: Yup.string().required('Required'),
       message: Yup.string().required('Required'),
     }),
-    // onSubmit: (values) => {
-    //   sendRequestMessage({
-    //     variables: {
-    //       shoe: {
-    //         ...values,
-    //         size: parseFloat(values.size),
-    //         kilometers: parseFloat(values.kilometers),
-    //       },
-    //     },
-    //   });
-    // },
+    onSubmit: (values) => {
+      sendShoeRequest({
+        variables: {
+          id: shoe._id,
+          request: values
+        },
+      });
+    },
   });
 
   const _renderError = (id) =>
@@ -107,7 +104,7 @@ const RequestModal = ({ ownerName }) => {
       <div>{formik.errors[id]}</div>
     ) : null;
 
-  const textPlaceholder = `let ${ownerName} know why would you like their shoes`;
+  const textPlaceholder = `let ${shoe.ownerName} know why would you like their shoes`;
 
   return (
     <ModalPortal>

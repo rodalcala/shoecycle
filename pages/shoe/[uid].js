@@ -2,7 +2,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import { withApollo } from '../../lib/apollo';
@@ -16,30 +16,6 @@ const RequestModalWithoutSSR = dynamic(
   () => import('../../components/RequestModal'),
   { ssr: false }
 );
-
-const GET_SHOE_BY_ID = gql`
-  query getShoeById($id: ID) {
-    shoeById(id: $id) {
-      _id
-      ownerName
-      email
-      verifiedEmail
-      brand
-      model
-      isFemaleShoe
-      isTrailShoe
-      size
-      kilometers
-      country
-      city
-      images
-      available
-      ships
-      intShipping
-      paidShipping
-    }
-  }
-`;
 
 const SpecificationContainer = styled.div`
   position: relative;
@@ -72,6 +48,40 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const GET_SHOE_BY_ID = gql`
+  query getShoeById($id: ID) {
+    shoeById(id: $id) {
+      _id
+      ownerName
+      email
+      verifiedEmail
+      brand
+      model
+      isFemaleShoe
+      isTrailShoe
+      size
+      kilometers
+      country
+      city
+      images
+      available
+      ships
+      intShipping
+      paidShipping
+    }
+  }
+`;
+
+const SEND_SHOE_REQUEST = gql`
+  mutation sendShoeRequest($id: ID, $request: RequestInput) {
+    sendShoeRequest(id: $id, request: $request) {
+      success
+      message
+      error
+    }
+  }
+`;
+
 const ShoeDetailedView = () => {
   const router = useRouter();
   const { uid } = router.query;
@@ -82,8 +92,9 @@ const ShoeDetailedView = () => {
 
   if (loading || error) return null;
 
+  const [sendShoeRequest] = useMutation(SEND_SHOE_REQUEST);
+
   const {
-    ownerName,
     brand,
     model,
     isFemaleShoe,
@@ -99,7 +110,10 @@ const ShoeDetailedView = () => {
 
   return (
     <Layout>
-      <RequestModalWithoutSSR ownerName={ownerName} />
+      <RequestModalWithoutSSR
+        shoe={data.shoeById}
+        sendShoeRequest={sendShoeRequest}
+      />
       <Header>
         <Container>
           <Link href="/">
