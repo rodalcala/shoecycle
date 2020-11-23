@@ -1,4 +1,5 @@
-import Shoes from './shoes';
+import Requests from './mongoose/requests.schema';
+import Shoes from './mongoose/shoes.schema';
 
 const resolvers = {
   Query: {
@@ -12,7 +13,7 @@ const resolvers = {
     },
     async shoeById(_, { id }) {
       try {
-        const [ shoe ] = await Shoes.find({ _id: id });
+        const [shoe] = await Shoes.find({ _id: id });
         return shoe;
       } catch (e) {
         console.log('shoeById query error:', e);
@@ -27,6 +28,7 @@ const resolvers = {
         return {
           success: true,
           message: 'shoe_creation_success',
+          error: null,
           shoe: newShoe,
         };
       } catch (e) {
@@ -34,7 +36,25 @@ const resolvers = {
         return {
           success: false,
           message: 'shoe_creation_failure',
+          error: e,
           shoe: null,
+        };
+      }
+    },
+    async sendShoeRequest(_, { id, request }) {
+      try {
+        console.log('id', id);
+        console.log('request', request);
+        // const newShoe = await Shoes.create(shoe);
+        return {
+          success: true,
+          message: 'send_request_message_success',
+        };
+      } catch (e) {
+        console.log('sendShoeRequest mutation error:', e);
+        return {
+          success: false,
+          message: 'send_request_message_failure',
         };
       }
     },

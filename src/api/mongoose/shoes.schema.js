@@ -1,10 +1,12 @@
-// Database collection
+// Database main collection
 import mongoose, { Schema } from 'mongoose';
+
+import { RequestSchema as Requests } from './requests.schema';
 
 const ShoesSchema = new Schema({
   ownerName: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
@@ -55,6 +57,7 @@ const ShoesSchema = new Schema({
   },
   intShipping: Boolean,
   paidShipping: Boolean,
+  requests: [Requests],
 });
 
 export default mongoose.models.shoes || mongoose.model('shoes', ShoesSchema);
