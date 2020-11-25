@@ -45,7 +45,7 @@ const resolvers = {
       try {
         console.log('id', id);
         console.log('request', request);
-        // const newShoe = await Shoes.create(shoe);
+        const newRequest = await Requests.create(request);
         return {
           success: true,
           message: 'send_request_message_success',

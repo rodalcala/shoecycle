@@ -19,6 +19,6 @@ export const RequestSchema = new Schema({
     type: String,
     required: true
   },
-})
+}, { timestamps })
 
 export default mongoose.models.requests || mongoose.model('requests', RequestSchema);

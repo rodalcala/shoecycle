@@ -58,6 +58,6 @@ const ShoesSchema = new Schema({
   intShipping: Boolean,
   paidShipping: Boolean,
   requests: [Requests],
-});
+}, { timestamps });
 
 export default mongoose.models.shoes || mongoose.model('shoes', ShoesSchema);
