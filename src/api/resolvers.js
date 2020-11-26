@@ -43,18 +43,17 @@ const resolvers = {
     },
     async sendShoeRequest(_, { id, request }) {
       try {
-        console.log('id', id);
-        console.log('request', request);
         const newRequest = await Requests.create(request);
+        await Shoes.findByIdAndUpdate(id, { $push: { requests: newRequest } });
         return {
           success: true,
-          message: 'send_request_message_success',
+          message: 'send_request_success',
         };
       } catch (e) {
         console.log('sendShoeRequest mutation error:', e);
         return {
           success: false,
-          message: 'send_request_message_failure',
+          message: 'send_request_failure',
         };
       }
     },
