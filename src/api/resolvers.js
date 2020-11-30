@@ -1,5 +1,6 @@
 import Requests from './mongoose/requests.schema';
 import Shoes from './mongoose/shoes.schema';
+import mailer, { formatRequestBody } from '../../lib/mailer';
 
 const resolvers = {
   Query: {
@@ -43,8 +44,17 @@ const resolvers = {
     },
     async sendShoeRequest(_, { id, request }) {
       try {
+        const requestedShoe = await Shoes.findById(id);
+        mailer.send({
+          from: process.env.SENDGRID_EMAIL,
+          to: requestedShoe.email,
+          subject: `shoe request from ${request.name}`,
+          text: formatRequestBody(request, requestedShoe),
+        });
+
         const newRequest = await Requests.create(request);
-        await Shoes.findByIdAndUpdate(id, { $push: { requests: newRequest } });
+        requestedShoe.requests.push(newRequest);
+        requestedShoe.save();
         return {
           success: true,
           message: 'send_request_success',
