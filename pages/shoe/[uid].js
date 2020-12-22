@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -90,9 +91,10 @@ const ShoeDetailedView = () => {
     variables: { id: uid },
   });
 
-  if (loading || error) return null;
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [sendShoeRequest] = useMutation(SEND_SHOE_REQUEST);
+
+  if (loading || error) return null;
 
   const {
     brand,
@@ -108,12 +110,18 @@ const ShoeDetailedView = () => {
     paidShipping,
   } = data.shoeById;
 
+  const openModal = () => setIsModalOpen(true);
+
+  const _renderModal = () => (
+    <RequestModalWithoutSSR
+      shoe={data.shoeById}
+      sendShoeRequest={sendShoeRequest}
+    />
+  );
+
   return (
     <Layout>
-      <RequestModalWithoutSSR
-        shoe={data.shoeById}
-        sendShoeRequest={sendShoeRequest}
-      />
+      {isModalOpen ? _renderModal() : null}
       <Header>
         <Container>
           <Link href="/">
@@ -142,7 +150,7 @@ const ShoeDetailedView = () => {
               <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
             </SpecificationContainer>
           </div>
-          <Button primary square margin={'.2em'}>
+          <Button primary square margin={'.2em'} onClick={openModal}>
             <a>I WANT IT</a>
           </Button>
           <SpecificationContainer size={2.5}>
