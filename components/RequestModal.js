@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
@@ -22,7 +23,7 @@ const CloseButton = styled.button`
   color: ${(props) => props.theme.colours.primary};
   font-size: 2rem;
   top: 0;
-  right: .6rem;
+  right: 0.6rem;
 
   &:active {
     transform: translateY(1px);
@@ -92,6 +93,7 @@ const Title = styled.h1`
 
 const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
   const ModalPortal = usePortal();
+  const modalBackground = useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -117,6 +119,13 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
     },
   });
 
+  /* NOTE: Close the modal whenever the user clicks on the modal's background */
+  const handleOutsideClick = (event) => {
+    if (modalBackground.current === event.target) {
+      handleClose()
+    }
+  };
+
   const _renderError = (id) =>
     formik.touched[id] && formik.errors[id] ? (
       <div>{formik.errors[id]}</div>
@@ -126,7 +135,7 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
 
   return (
     <ModalPortal>
-      <ModalBackground>
+      <ModalBackground onClick={handleOutsideClick} ref={modalBackground}>
         <ModalContainer>
           <CloseButton onClick={handleClose}>x</CloseButton>
           <Title>request form</Title>
