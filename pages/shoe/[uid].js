@@ -111,11 +111,13 @@ const ShoeDetailedView = () => {
   } = data.shoeById;
 
   const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const _renderModal = () => (
     <RequestModalWithoutSSR
       shoe={data.shoeById}
       sendShoeRequest={sendShoeRequest}
+      handleClose={closeModal}
     />
   );
 

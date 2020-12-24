@@ -17,6 +17,23 @@ const ModalBackground = styled.div`
   justify-content: center;
 `;
 
+const CloseButton = styled.button`
+  position: absolute;
+  color: ${(props) => props.theme.colours.primary};
+  font-size: 2rem;
+  top: 0;
+  right: .6rem;
+
+  &:active {
+    transform: translateY(1px);
+    filter: saturate(150%);
+  }
+  &:focus {
+    outline: none;
+    outline-offset: none;
+  }
+`;
+
 const ModalContainer = styled.div`
   background-color: ${(props) => props.theme.colours.disabled};
   height: 85%;
@@ -27,6 +44,7 @@ const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 0.1em;
+  position: relative;
 `;
 
 const Form = styled.form`
@@ -72,7 +90,7 @@ const Title = styled.h1`
   margin: 1rem 0;
 `;
 
-const RequestModal = ({ shoe, sendShoeRequest }) => {
+const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
   const ModalPortal = usePortal();
 
   const formik = useFormik({
@@ -93,7 +111,7 @@ const RequestModal = ({ shoe, sendShoeRequest }) => {
       sendShoeRequest({
         variables: {
           id: shoe._id,
-          request: values
+          request: values,
         },
       });
     },
@@ -110,6 +128,7 @@ const RequestModal = ({ shoe, sendShoeRequest }) => {
     <ModalPortal>
       <ModalBackground>
         <ModalContainer>
+          <CloseButton onClick={handleClose}>x</CloseButton>
           <Title>request form</Title>
           <Form onSubmit={formik.handleSubmit}>
             <Field>
