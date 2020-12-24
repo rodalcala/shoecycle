@@ -16,6 +16,7 @@ type Shoe {
   ships: Boolean!
   intShipping: Boolean
   paidShipping: Boolean
+  requests: [Request]
 }
 
 input ShoeInput {
@@ -35,6 +36,23 @@ input ShoeInput {
   paidShipping: Boolean
 }
 
+type Request {
+  _id: ID!
+  name: String!
+  email: String!
+  city: String
+  country: String!
+  message: String!
+}
+
+input RequestInput {
+  name: String!
+  email: String!
+  city: String
+  country: String!
+  message: String!
+}
+
 type Query {
   shoes: [Shoe]
   shoesByBrand(brand: String): [Shoe]
@@ -43,10 +61,18 @@ type Query {
 
 type Mutation {
   addShoe(shoe: ShoeInput): CreateShoeResponse!
+  sendShoeRequest(id: ID, request: RequestInput): SendRequestResponse!
 }
 
 type CreateShoeResponse {
   success: Boolean!
-  message: String
-  shoe: Shoe!
+  message: String!
+  error: String
+  shoe: Shoe
+}
+
+type SendRequestResponse {
+  success: Boolean!
+  message: String!
+  error: String
 }

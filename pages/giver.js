@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import styled from 'styled-components';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -15,6 +14,7 @@ const ADD_SHOE = gql`
     addShoe(shoe: $shoe) {
       success
       message
+      error
       shoe {
         _id
       }

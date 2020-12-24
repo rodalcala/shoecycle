@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import { withApollo } from '../../lib/apollo';
@@ -11,29 +13,10 @@ import Button from '../../components/styled/Button';
 import Container from '../../components/styled/Container';
 import Header from '../../components/styled/Header';
 
-const GET_SHOE_BY_ID = gql`
-  query getShoeById($id: ID) {
-    shoeById(id: $id) {
-      _id
-      ownerName
-      email
-      verifiedEmail
-      brand
-      model
-      isFemaleShoe
-      isTrailShoe
-      size
-      kilometers
-      country
-      city
-      images
-      available
-      ships
-      intShipping
-      paidShipping
-    }
-  }
-`;
+const RequestModalWithoutSSR = dynamic(
+  () => import('../../components/RequestModal'),
+  { ssr: false }
+);
 
 const SpecificationContainer = styled.div`
   position: relative;
@@ -66,6 +49,40 @@ const FlexContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const GET_SHOE_BY_ID = gql`
+  query getShoeById($id: ID) {
+    shoeById(id: $id) {
+      _id
+      ownerName
+      email
+      verifiedEmail
+      brand
+      model
+      isFemaleShoe
+      isTrailShoe
+      size
+      kilometers
+      country
+      city
+      images
+      available
+      ships
+      intShipping
+      paidShipping
+    }
+  }
+`;
+
+const SEND_SHOE_REQUEST = gql`
+  mutation sendShoeRequest($id: ID, $request: RequestInput) {
+    sendShoeRequest(id: $id, request: $request) {
+      success
+      message
+      error
+    }
+  }
+`;
+
 const ShoeDetailedView = () => {
   const router = useRouter();
   const { uid } = router.query;
@@ -73,6 +90,9 @@ const ShoeDetailedView = () => {
   const { data, loading, error } = useQuery(GET_SHOE_BY_ID, {
     variables: { id: uid },
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sendShoeRequest] = useMutation(SEND_SHOE_REQUEST);
 
   if (loading || error) return null;
 
@@ -90,8 +110,20 @@ const ShoeDetailedView = () => {
     paidShipping,
   } = data.shoeById;
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const _renderModal = () => (
+    <RequestModalWithoutSSR
+      shoe={data.shoeById}
+      sendShoeRequest={sendShoeRequest}
+      handleClose={closeModal}
+    />
+  );
+
   return (
     <Layout>
+      {isModalOpen ? _renderModal() : null}
       <Header>
         <Container>
           <Link href="/">
@@ -120,7 +152,7 @@ const ShoeDetailedView = () => {
               <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
             </SpecificationContainer>
           </div>
-          <Button primary square margin={'.2em'}>
+          <Button primary square margin={'.2em'} onClick={openModal}>
             <a>I WANT IT</a>
           </Button>
           <SpecificationContainer size={2.5}>

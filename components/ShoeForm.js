@@ -100,9 +100,6 @@ const Field = styled.div`
     outline: none;
     outline-offset: none;
     box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
-    -moz-box-shadow: inset 0 0 0.3em ${(props) => props.theme.colours.primary};
-    -webkit-box-shadow: inset 0 0 0.3em
-      ${(props) => props.theme.colours.primary};
   }
 
   > label {
@@ -309,7 +306,7 @@ const ShoeForm = ({ addShoe }) => {
 
       <Field>
         <Button type="submit" margin="1em 0" primary>
-          Submit
+          submit
         </Button>
       </Field>
     </Form>
