@@ -116,13 +116,14 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
           request: values,
         },
       });
+      handleClose();
     },
   });
 
   /* NOTE: Close the modal whenever the user clicks on the modal's background */
   const handleOutsideClick = (event) => {
     if (modalBackground.current === event.target) {
-      handleClose()
+      handleClose();
     }
   };
 
