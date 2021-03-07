@@ -2,13 +2,24 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const ShoeBox = styled.div`
-  background-image: url(${(props) => props.backgroundImage || '/silhouette.png'});
+  background-image: url(${(props) =>
+    props.backgroundImage || '/silhouette.png'});
   background-repeat: no-repeat;
-  background-size: 100%;
-  padding-top: 100%;
+  background-size: cover;
+  width: 79vw;
+  min-width: 250px;
+  max-width: 300px;
+  height: 80vw;
+  min-height: 250px;
+  max-height: 300px;
   position: relative;
-  text-align: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 1vw;
+  margin-right: 1vw;
+  font-size: 12px;
+
+  @media (min-width: 368px) {
+    font-size: 15px;
+  }
 `;
 
 const MainData = styled.div`
@@ -23,11 +34,11 @@ const MainData = styled.div`
   padding: 1em;
 
   > h1 {
-    font-size: 3.5rem;
+    font-size: 3em;
   }
 
   > h2 {
-    font-size: 5rem;
+    font-size: 4em;
   }
 `;
 
@@ -45,13 +56,13 @@ const SecondaryData = styled.div`
   > div {
     display: flex;
     > h3 {
-      font-size: 1.8rem;
-      padding: 0.2rem;
+      font-size: 1.6em;
+      padding: 0.2em;
     }
   }
   > h3 {
-    font-size: 1.8rem;
-    padding: 0.2rem;
+    font-size: 1.6em;
+    padding: 0.2em;
   }
 `;
 
@@ -70,19 +81,19 @@ const Shoe = ({ shoe }) => {
 
   return (
     <Link href={`/shoe/${shoe._id}`}>
-    <ShoeBox>
-      <MainData>
-        <h1>{shoe.brand}</h1>
-        <h2>{shoe.size}</h2>
-      </MainData>
-      <SecondaryData>
-        <div>
-          <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
-          <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
-        </div>
-        <h3>{_renderUsage()}</h3>
-      </SecondaryData>
-    </ShoeBox>
+      <ShoeBox>
+        <MainData>
+          <h1>{shoe.brand}</h1>
+          <h2>{shoe.size}</h2>
+        </MainData>
+        <SecondaryData>
+          <div>
+            <h3>{shoe.isFemaleShoe ? '🚺' : '🚹'}</h3>
+            <h3>{shoe.isTrailShoe ? '⛰' : '🛣'}</h3>
+          </div>
+          <h3>{_renderUsage()}</h3>
+        </SecondaryData>
+      </ShoeBox>
     </Link>
   );
 };
