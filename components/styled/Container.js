@@ -1,9 +1,19 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Container = styled.div`
   width: 80%;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+
+  ${(props) =>
+    /* NOTE: Set as flexbox if the flex prop is passed */
+    props.flex &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-bottom: 2rem;
+    `}
 
   > h1 {
     font-size: 4rem;
