@@ -43,12 +43,6 @@ const SpecificationContainer = styled.div`
   }
 `;
 
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
 const GET_SHOE_BY_ID = gql`
   query getShoeById($id: ID) {
     shoeById(id: $id) {
@@ -132,62 +126,60 @@ const ShoeDetailedView = () => {
           <h3>AVAILABLE SHOE</h3>
         </Container>
       </Header>
-      <Container>
-        <FlexContainer>
-          <SpecificationContainer size={2}>
-            <h4>brand</h4>
-            <h1>{brand}</h1>
+      <Container flex>
+        <SpecificationContainer size={2}>
+          <h4>brand</h4>
+          <h1>{brand}</h1>
+        </SpecificationContainer>
+        <SpecificationContainer>
+          <h4>model</h4>
+          <h1>{model}</h1>
+        </SpecificationContainer>
+        <div>
+          <SpecificationContainer>
+            <h4>gender</h4>
+            <h1>{isFemaleShoe ? 'female' : 'male'}</h1>
           </SpecificationContainer>
           <SpecificationContainer>
-            <h4>model</h4>
-            <h1>{model}</h1>
+            <h4>surface</h4>
+            <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
           </SpecificationContainer>
-          <div>
-            <SpecificationContainer>
-              <h4>gender</h4>
-              <h1>{isFemaleShoe ? 'female' : 'male'}</h1>
-            </SpecificationContainer>
-            <SpecificationContainer>
-              <h4>surface</h4>
-              <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
-            </SpecificationContainer>
-          </div>
-          <Button primary square margin={'.2em'} onClick={openModal}>
-            <a>I WANT IT</a>
-          </Button>
-          <SpecificationContainer size={2.5}>
-            <h4>size</h4>
-            <h1>{size}</h1>
+        </div>
+        <Button primary square margin={'.2em'} onClick={openModal}>
+          <a>I WANT IT</a>
+        </Button>
+        <SpecificationContainer size={2.5}>
+          <h4>size</h4>
+          <h1>{size}</h1>
+        </SpecificationContainer>
+        <SpecificationContainer size={2}>
+          <h4>kms</h4>
+          <h1>{kilometers}</h1>
+        </SpecificationContainer>
+        <div>
+          <SpecificationContainer>
+            <h4>country</h4>
+            <h1>{country}</h1>
           </SpecificationContainer>
-          <SpecificationContainer size={2}>
-            <h4>kms</h4>
-            <h1>{kilometers}</h1>
+          <SpecificationContainer>
+            <h4>city</h4>
+            <h1>{city}</h1>
           </SpecificationContainer>
-          <div>
-            <SpecificationContainer>
-              <h4>country</h4>
-              <h1>{country}</h1>
-            </SpecificationContainer>
-            <SpecificationContainer>
-              <h4>city</h4>
-              <h1>{city}</h1>
-            </SpecificationContainer>
-          </div>
-          <SpecificationContainer size={2}>
-            <h4>ships</h4>
-            <h1>{ships ? 'YES' : 'NO'}</h1>
+        </div>
+        <SpecificationContainer size={2}>
+          <h4>ships</h4>
+          <h1>{ships ? 'YES' : 'NO'}</h1>
+        </SpecificationContainer>
+        <div>
+          <SpecificationContainer>
+            <h4>int nat</h4>
+            <h1>{intShipping ? 'YES' : 'NO'}</h1>
           </SpecificationContainer>
-          <div>
-            <SpecificationContainer>
-              <h4>int nat</h4>
-              <h1>{intShipping ? 'YES' : 'NO'}</h1>
-            </SpecificationContainer>
-            <SpecificationContainer>
-              <h4>paid</h4>
-              <h1>{paidShipping ? 'YES' : 'NO'}</h1>
-            </SpecificationContainer>
-          </div>
-        </FlexContainer>
+          <SpecificationContainer>
+            <h4>paid</h4>
+            <h1>{paidShipping ? 'YES' : 'NO'}</h1>
+          </SpecificationContainer>
+        </div>
       </Container>
     </Layout>
   );
