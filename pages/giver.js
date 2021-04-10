@@ -23,7 +23,7 @@ const ADD_SHOE = gql`
 `;
 
 const Giver = () => {
-  const [addShoe] = useMutation(ADD_SHOE);
+  const [addShoe, mutationData] = useMutation(ADD_SHOE);
 
   return (
     <Layout>
@@ -35,7 +35,7 @@ const Giver = () => {
           <h3>RECYCLE UR SHOES</h3>
         </Container>
       </Header>
-      <ShoeForm addShoe={addShoe} />
+      <ShoeForm addShoe={addShoe} mutationData={mutationData} />
     </Layout>
   );
 };

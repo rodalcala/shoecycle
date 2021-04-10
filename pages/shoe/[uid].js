@@ -86,10 +86,7 @@ const ShoeDetailedView = () => {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [
-    sendShoeRequest,
-    mutationData,
-  ] = useMutation(SEND_SHOE_REQUEST);
+  const [sendShoeRequest, mutationData] = useMutation(SEND_SHOE_REQUEST);
 
   if (loading || error) return null;
 
