@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import usePortal from '../lib/usePortal';
 import Button from './styled/Button';
+import Loader from './styled/Loader';
 
 const ModalBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -91,7 +92,7 @@ const Title = styled.h1`
   margin: 1rem 0;
 `;
 
-const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
+const RequestModal = ({ shoe, sendShoeRequest, handleClose, mutationData }) => {
   const ModalPortal = usePortal();
   const modalBackground = useRef(null);
 
@@ -131,6 +132,20 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
     formik.touched[id] && formik.errors[id] ? (
       <div>{formik.errors[id]}</div>
     ) : null;
+
+  /* NOTE: Render a loader when the submittion is being processed */
+  const _renderButtonContent = (isLoading) => (
+    <>
+      {isLoading && <Loader />}
+      <p
+        style={{
+          /* NOTE: Switch visibility to maintain the button's dimensions */
+          visibility: isLoading ? 'hidden' : 'visible',
+        }}>
+        submit
+      </p>
+    </>
+  );
 
   const textPlaceholder = `let ${shoe.ownerName} know why would you like their shoes`;
 
@@ -193,7 +208,7 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose }) => {
 
             <Field>
               <Button type="submit" margin="1em 0">
-                submit
+                {_renderButtonContent(mutationData.loading)}
               </Button>
             </Field>
           </Form>

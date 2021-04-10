@@ -86,7 +86,10 @@ const ShoeDetailedView = () => {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sendShoeRequest] = useMutation(SEND_SHOE_REQUEST);
+  const [
+    sendShoeRequest,
+    mutationData,
+  ] = useMutation(SEND_SHOE_REQUEST);
 
   if (loading || error) return null;
 
@@ -111,6 +114,7 @@ const ShoeDetailedView = () => {
     <RequestModalWithoutSSR
       shoe={data.shoeById}
       sendShoeRequest={sendShoeRequest}
+      mutationData={mutationData}
       handleClose={closeModal}
     />
   );
