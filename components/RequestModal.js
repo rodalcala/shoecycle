@@ -92,7 +92,7 @@ const Title = styled.h1`
   margin: 1rem 0;
 `;
 
-const RequestModal = ({ shoe, handleSubmit, handleClose, mutationData }) => {
+const RequestModal = ({ shoe, handleSubmit, handleClose }) => {
   const ModalPortal = usePortal();
   const modalBackground = useRef(null);
 
@@ -124,13 +124,13 @@ const RequestModal = ({ shoe, handleSubmit, handleClose, mutationData }) => {
     formik.touched[id] && formik.errors[id] ? <p>{formik.errors[id]}</p> : null;
 
   /* NOTE: Render a loader when the submittion is being processed */
-  const _renderButtonContent = (isLoading) => (
+  const _renderButtonContent = ({ isSubmitting }) => (
     <>
-      {isLoading && <Loader />}
+      {isSubmitting && <Loader />}
       <p
         style={{
           /* NOTE: Switch visibility to maintain the button's dimensions */
-          visibility: isLoading ? 'hidden' : 'visible',
+          visibility: isSubmitting ? 'hidden' : 'visible',
         }}>
         submit
       </p>
@@ -197,8 +197,11 @@ const RequestModal = ({ shoe, handleSubmit, handleClose, mutationData }) => {
             </Field>
 
             <Field>
-              <Button type="submit" margin="1em 0">
-                {_renderButtonContent(mutationData.loading)}
+              <Button
+                type="submit"
+                margin="1em 0"
+                disabled={formik.isSubmitting}>
+                {_renderButtonContent(formik)}
               </Button>
               {formik.errors['form'] && <p>{formik.errors['form']}</p>}
             </Field>

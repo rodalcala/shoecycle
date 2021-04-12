@@ -111,7 +111,7 @@ const Field = styled.div`
   }
 `;
 
-const ShoeForm = ({ handleSubmit, mutationData }) => {
+const ShoeForm = ({ handleSubmit }) => {
   const formik = useFormik({
     initialValues: {
       ownerName: '',
@@ -143,13 +143,13 @@ const ShoeForm = ({ handleSubmit, mutationData }) => {
     formik.touched[id] && formik.errors[id] ? <p>{formik.errors[id]}</p> : null;
 
   /* NOTE: Render a loader when the submittion is being processed */
-  const _renderButtonContent = (isLoading) => (
+  const _renderButtonContent = ({ isSubmitting }) => (
     <>
-      {isLoading && <Loader />}
+      {isSubmitting && <Loader />}
       <p
         style={{
           /* NOTE: Switch visibility to maintain the button's dimensions */
-          visibility: isLoading ? 'hidden' : 'visible',
+          visibility: isSubmitting ? 'hidden' : 'visible',
         }}>
         submit
       </p>
@@ -303,8 +303,12 @@ const ShoeForm = ({ handleSubmit, mutationData }) => {
       </Field>
 
       <Field>
-        <Button type="submit" margin="1em 0" primary>
-          {_renderButtonContent(mutationData.loading)}
+        <Button
+          type="submit"
+          margin="1em 0"
+          primary
+          disabled={formik.isSubmitting}>
+          {_renderButtonContent(formik)}
         </Button>
         {formik.errors['form'] && <p>{formik.errors['form']}</p>}
       </Field>

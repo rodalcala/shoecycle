@@ -31,7 +31,7 @@ const ADD_SHOE = gql`
 `;
 
 const Giver = () => {
-  const [addShoe, mutationData] = useMutation(ADD_SHOE);
+  const [addShoe] = useMutation(ADD_SHOE);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
@@ -45,7 +45,7 @@ const Giver = () => {
       values.paidShipping = false;
     }
 
-    addShoe({
+    return addShoe({
       variables: {
         shoe: {
           ...values,
@@ -86,7 +86,7 @@ const Giver = () => {
           <h3>RECYCLE UR SHOES</h3>
         </Container>
       </Header>
-      <ShoeForm handleSubmit={handleSubmit} mutationData={mutationData} />
+      <ShoeForm handleSubmit={handleSubmit} />
     </Layout>
   );
 };

@@ -92,7 +92,7 @@ const ShoeDetailedView = () => {
 
   const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [sendShoeRequest, mutationData] = useMutation(SEND_SHOE_REQUEST);
+  const [sendShoeRequest] = useMutation(SEND_SHOE_REQUEST);
 
   if (loading || error) return null;
 
@@ -117,7 +117,7 @@ const ShoeDetailedView = () => {
   const closeSuccessModal = () => setIsSuccessModalOpen(false);
 
   const handleSubmit = (values, { setFieldError }) => {
-    sendShoeRequest({
+    return sendShoeRequest({
       variables: {
         id: _id,
         request: values,
@@ -138,7 +138,6 @@ const ShoeDetailedView = () => {
     <RequestModalWithoutSSR
       shoe={data.shoeById}
       handleSubmit={handleSubmit}
-      mutationData={mutationData}
       handleClose={closeRequestModal}
     />
   );
