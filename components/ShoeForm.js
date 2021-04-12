@@ -111,7 +111,7 @@ const Field = styled.div`
   }
 `;
 
-const ShoeForm = ({ addShoe, mutationData }) => {
+const ShoeForm = ({ handleSubmit, mutationData }) => {
   const formik = useFormik({
     initialValues: {
       ownerName: '',
@@ -136,23 +136,7 @@ const ShoeForm = ({ addShoe, mutationData }) => {
       size: Yup.number().required('Required'),
       kilometers: Yup.number().required('Required'),
     }),
-    onSubmit: (values) => {
-      /* NOTE: Clear fields dependent on shipping if it got unchecked */
-      if (!values.ships) {
-        values.intShipping = false;
-        values.paidShipping = false;
-      }
-
-      addShoe({
-        variables: {
-          shoe: {
-            ...values,
-            size: parseFloat(values.size),
-            kilometers: parseFloat(values.kilometers),
-          },
-        },
-      });
-    },
+    onSubmit: handleSubmit
   });
 
   const _renderError = (id) =>
