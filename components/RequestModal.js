@@ -92,7 +92,7 @@ const Title = styled.h1`
   margin: 1rem 0;
 `;
 
-const RequestModal = ({ shoe, sendShoeRequest, handleClose, mutationData }) => {
+const RequestModal = ({ shoe, handleSubmit, handleClose, mutationData }) => {
   const ModalPortal = usePortal();
   const modalBackground = useRef(null);
 
@@ -110,15 +110,7 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose, mutationData }) => {
       country: Yup.string().required('Required'),
       message: Yup.string().required('Required'),
     }),
-    onSubmit: (values) => {
-      sendShoeRequest({
-        variables: {
-          id: shoe._id,
-          request: values,
-        },
-      });
-      handleClose();
-    },
+    onSubmit: handleSubmit,
   });
 
   /* NOTE: Close the modal whenever the user clicks on the modal's background */
@@ -129,9 +121,7 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose, mutationData }) => {
   };
 
   const _renderError = (id) =>
-    formik.touched[id] && formik.errors[id] ? (
-      <div>{formik.errors[id]}</div>
-    ) : null;
+    formik.touched[id] && formik.errors[id] ? <p>{formik.errors[id]}</p> : null;
 
   /* NOTE: Render a loader when the submittion is being processed */
   const _renderButtonContent = (isLoading) => (
@@ -210,6 +200,7 @@ const RequestModal = ({ shoe, sendShoeRequest, handleClose, mutationData }) => {
               <Button type="submit" margin="1em 0">
                 {_renderButtonContent(mutationData.loading)}
               </Button>
+              {formik.errors['form'] && <p>{formik.errors['form']}</p>}
             </Field>
           </Form>
         </ModalContainer>

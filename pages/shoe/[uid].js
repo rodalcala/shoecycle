@@ -18,6 +18,11 @@ const RequestModalWithoutSSR = dynamic(
   { ssr: false }
 );
 
+const SuccessModalWithoutSSR = dynamic(
+  () => import('../../components/SuccessModal'),
+  { ssr: false }
+);
+
 const SpecificationContainer = styled.div`
   position: relative;
   margin: 0.4rem;
@@ -85,12 +90,14 @@ const ShoeDetailedView = () => {
     variables: { id: uid },
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [sendShoeRequest, mutationData] = useMutation(SEND_SHOE_REQUEST);
 
   if (loading || error) return null;
 
   const {
+    _id,
     brand,
     model,
     isFemaleShoe,
@@ -104,21 +111,46 @@ const ShoeDetailedView = () => {
     paidShipping,
   } = data.shoeById;
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openRequestModal = () => setIsRequestModalOpen(true);
+  const closeRequestModal = () => setIsRequestModalOpen(false);
+  const openSuccessModal = () => setIsSuccessModalOpen(true);
+  const closeSuccessModal = () => setIsSuccessModalOpen(false);
 
-  const _renderModal = () => (
+  const handleSubmit = (values, { setFieldError }) => {
+    sendShoeRequest({
+      variables: {
+        id: _id,
+        request: values,
+      },
+    })
+      .then(({ data: { sendShoeRequest } }) => {
+        if (sendShoeRequest.error) {
+          setFieldError('form', error);
+        } else if (sendShoeRequest.success) {
+          closeRequestModal();
+          openSuccessModal();
+        }
+      })
+      .catch((err) => setFieldError('form', err));
+  };
+
+  const _renderRequestModal = () => (
     <RequestModalWithoutSSR
       shoe={data.shoeById}
-      sendShoeRequest={sendShoeRequest}
+      handleSubmit={handleSubmit}
       mutationData={mutationData}
-      handleClose={closeModal}
+      handleClose={closeRequestModal}
     />
+  );
+
+  const _renderSuccessModal = () => (
+    <SuccessModalWithoutSSR handleClose={closeSuccessModal} />
   );
 
   return (
     <Layout>
-      {isModalOpen ? _renderModal() : null}
+      {isSuccessModalOpen ? _renderSuccessModal() : null}
+      {isRequestModalOpen ? _renderRequestModal() : null}
       <Header>
         <Container>
           <Link href="/">
@@ -146,7 +178,7 @@ const ShoeDetailedView = () => {
             <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
           </SpecificationContainer>
         </div>
-        <Button primary square margin={'.2em'} onClick={openModal}>
+        <Button primary square margin={'.2em'} onClick={openRequestModal}>
           <a>I WANT IT</a>
         </Button>
         <SpecificationContainer size={2.5}>
