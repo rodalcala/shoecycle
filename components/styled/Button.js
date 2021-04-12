@@ -10,6 +10,9 @@ const Button = styled.button`
   border: 2px solid;
   box-shadow: 0px 10px 10px -15px #111;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   ${(props) =>
     props.square &&
@@ -27,7 +30,7 @@ const Button = styled.button`
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, -50%);
       }
     `}
 

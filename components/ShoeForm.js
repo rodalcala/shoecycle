@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import styled from 'styled-components';
 
 import Button from './styled/Button';
+import Loader from './styled/Loader';
 
 const sizeOptions = [
   6,
@@ -85,7 +86,8 @@ const Field = styled.div`
   }
 
   > input[type='checkbox']:disabled {
-    background-color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
+    background-color: ${(props) =>
+      props.disabled ? props.theme.colours.disabled : null};
   }
 
   > select {
@@ -105,11 +107,11 @@ const Field = styled.div`
   > label {
     vertical-align: middle;
     margin-left: 0.2em;
-    color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
+    color: ${(props) => (props.disabled ? props.theme.colours.disabled : null)};
   }
 `;
 
-const ShoeForm = ({ addShoe }) => {
+const ShoeForm = ({ handleSubmit }) => {
   const formik = useFormik({
     initialValues: {
       ownerName: '',
@@ -134,29 +136,25 @@ const ShoeForm = ({ addShoe }) => {
       size: Yup.number().required('Required'),
       kilometers: Yup.number().required('Required'),
     }),
-    onSubmit: (values) => {
-      /* NOTE: Clear fields dependent on shipping if it got unchecked */
-      if (!values.ships) {
-        values.intShipping = false;
-        values.paidShipping = false;
-      }
-
-      addShoe({
-        variables: {
-          shoe: {
-            ...values,
-            size: parseFloat(values.size),
-            kilometers: parseFloat(values.kilometers),
-          },
-        },
-      });
-    },
+    onSubmit: handleSubmit,
   });
 
   const _renderError = (id) =>
-    formik.touched[id] && formik.errors[id] ? (
-      <div>{formik.errors[id]}</div>
-    ) : null;
+    formik.touched[id] && formik.errors[id] ? <p>{formik.errors[id]}</p> : null;
+
+  /* NOTE: Render a loader when the submittion is being processed */
+  const _renderButtonContent = ({ isSubmitting }) => (
+    <>
+      {isSubmitting && <Loader />}
+      <p
+        style={{
+          /* NOTE: Switch visibility to maintain the button's dimensions */
+          visibility: isSubmitting ? 'hidden' : 'visible',
+        }}>
+        submit
+      </p>
+    </>
+  );
 
   return (
     <Form onSubmit={formik.handleSubmit}>
@@ -305,9 +303,14 @@ const ShoeForm = ({ addShoe }) => {
       </Field>
 
       <Field>
-        <Button type="submit" margin="1em 0" primary>
-          submit
+        <Button
+          type="submit"
+          margin="1em 0"
+          primary
+          disabled={formik.isSubmitting}>
+          {_renderButtonContent(formik)}
         </Button>
+        {formik.errors['form'] && <p>{formik.errors['form']}</p>}
       </Field>
     </Form>
   );

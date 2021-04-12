@@ -27,7 +27,7 @@ const Home = () => {
         </Container>
       </Section>
       <Section secondary>
-        <Container>
+        <Container flex center>
           <Link href="/giver">
             <Button margin="1em" primary>giving</Button>
           </Link>
