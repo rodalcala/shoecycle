@@ -136,13 +136,11 @@ const ShoeForm = ({ handleSubmit, mutationData }) => {
       size: Yup.number().required('Required'),
       kilometers: Yup.number().required('Required'),
     }),
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   const _renderError = (id) =>
-    formik.touched[id] && formik.errors[id] ? (
-      <div>{formik.errors[id]}</div>
-    ) : null;
+    formik.touched[id] && formik.errors[id] ? <p>{formik.errors[id]}</p> : null;
 
   /* NOTE: Render a loader when the submittion is being processed */
   const _renderButtonContent = (isLoading) => (
@@ -308,6 +306,7 @@ const ShoeForm = ({ handleSubmit, mutationData }) => {
         <Button type="submit" margin="1em 0" primary>
           {_renderButtonContent(mutationData.loading)}
         </Button>
+        {formik.errors['form'] && <p>{formik.errors['form']}</p>}
       </Field>
     </Form>
   );

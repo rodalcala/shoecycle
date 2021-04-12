@@ -125,13 +125,13 @@ const ShoeDetailedView = () => {
     })
       .then(({ data: { sendShoeRequest } }) => {
         if (sendShoeRequest.error) {
-          setFieldError('form', error);
+          setFieldError('form', String(error));
         } else if (sendShoeRequest.success) {
           closeRequestModal();
           openSuccessModal();
         }
       })
-      .catch((err) => setFieldError('form', err));
+      .catch((error) => setFieldError('form', String(error)));
   };
 
   const _renderRequestModal = () => (

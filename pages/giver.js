@@ -32,7 +32,7 @@ const ADD_SHOE = gql`
 
 const Giver = () => {
   const [addShoe, mutationData] = useMutation(ADD_SHOE);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   const openModal = () => setIsModalOpen(true);
@@ -56,12 +56,14 @@ const Giver = () => {
     })
       .then(({ data: { addShoe } }) => {
         if (addShoe.error) {
-          setFieldError('form', error);
+          setFieldError('form', String(error));
         } else if (addShoe.success) {
           openModal();
         }
       })
-      .catch((err) => setFieldError('form', err));
+      .catch((error) => {
+        setFieldError('form', String(error));
+      });
   };
 
   const handleModalClose = () => {
