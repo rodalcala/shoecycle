@@ -45,6 +45,20 @@ const resolvers = {
     async sendShoeRequest(_, { id, request }) {
       try {
         const requestedShoe = await Shoes.findById(id);
+
+        /* NOTE: Check if receiver already submit a request for this shoe */
+        const hasRequestedBefore = requestedShoe.requests.some(
+          (e) => e.email === request.email
+        );
+
+        if (hasRequestedBefore) {
+          return {
+            success: false,
+            message: 'send_request_failure',
+            error: 'you already requested this shoe',
+          };
+        }
+
         mailer.send({
           from: process.env.SENDGRID_EMAIL,
           to: requestedShoe.email,
@@ -64,6 +78,7 @@ const resolvers = {
         return {
           success: false,
           message: 'send_request_failure',
+          error: e,
         };
       }
     },
