@@ -125,7 +125,7 @@ const ShoeDetailedView = () => {
     })
       .then(({ data: { sendShoeRequest } }) => {
         if (sendShoeRequest.error) {
-          setFieldError('form', String(error));
+          setFieldError('form', sendShoeRequest.error);
         } else if (sendShoeRequest.success) {
           closeRequestModal();
           openSuccessModal();
