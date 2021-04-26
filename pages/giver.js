@@ -56,7 +56,7 @@ const Giver = () => {
     })
       .then(({ data: { addShoe } }) => {
         if (addShoe.error) {
-          setFieldError('form', String(error));
+          setFieldError('form', addShoe.error);
         } else if (addShoe.success) {
           openModal();
         }
