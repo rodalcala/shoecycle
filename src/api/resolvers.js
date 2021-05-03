@@ -69,7 +69,7 @@ const resolvers = {
           from: process.env.SENDGRID_EMAIL,
           to: request.email,
           subject: `verify your email for shoe ${requestedShoe.brand}`,
-          text: formatVerificationBody(request, requestedShoe),
+          html: formatVerificationBody(request, requestedShoe),
         });
 
         return {

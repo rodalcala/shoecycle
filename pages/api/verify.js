@@ -22,7 +22,7 @@ async function handler(req, res) {
       text: formatRequestBody(request, shoe),
     });
 
-    res.status(200).json('thanks for verifying your email!');
+    res.status(200).json('thanks for verifying your email! you are all set');
   } catch (e) {
     console.error('email verification error:', e);
     res.status(500).json('error during verification, please try again');
