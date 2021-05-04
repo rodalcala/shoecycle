@@ -20,6 +20,10 @@ export const RequestSchema = new Schema(
       type: String,
       required: true,
     },
+    sent: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

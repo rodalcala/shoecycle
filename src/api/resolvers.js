@@ -61,7 +61,7 @@ const resolvers = {
 
         const request = await Requests.create(requestData);
         requestedShoe.requests.push(request);
-        requestedShoe.save();
+        await requestedShoe.save();
 
         /* NOTE: Verify receiver's email before sending the request message */
 
