@@ -43,6 +43,7 @@ type Request {
   city: String
   country: String!
   message: String!
+  sent: Boolean!
 }
 
 input RequestInput {

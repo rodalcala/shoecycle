@@ -1,6 +1,6 @@
 import Requests from './mongoose/requests.schema';
 import Shoes from './mongoose/shoes.schema';
-import mailer, { formatRequestBody } from '../../lib/mailer';
+import mailer, { formatVerificationBody } from '../../lib/mailer';
 
 const resolvers = {
   Query: {
@@ -42,13 +42,13 @@ const resolvers = {
         };
       }
     },
-    async sendShoeRequest(_, { id, request }) {
+    async sendShoeRequest(_, { id, request: requestData }) {
       try {
         const requestedShoe = await Shoes.findById(id);
 
         /* NOTE: Check if receiver already submit a request for this shoe */
         const hasRequestedBefore = requestedShoe.requests.some(
-          (e) => e.email === request.email
+          (e) => e.email === requestData.email
         );
 
         if (hasRequestedBefore) {
@@ -59,16 +59,19 @@ const resolvers = {
           };
         }
 
+        const request = await Requests.create(requestData);
+        requestedShoe.requests.push(request);
+        await requestedShoe.save();
+
+        /* NOTE: Verify receiver's email before sending the request message */
+
         mailer.send({
           from: process.env.SENDGRID_EMAIL,
-          to: requestedShoe.email,
-          subject: `shoe request from ${request.name}`,
-          text: formatRequestBody(request, requestedShoe),
+          to: request.email,
+          subject: `verify your email for shoe ${requestedShoe.brand}`,
+          html: formatVerificationBody(request, requestedShoe),
         });
 
-        const newRequest = await Requests.create(request);
-        requestedShoe.requests.push(newRequest);
-        requestedShoe.save();
         return {
           success: true,
           message: 'send_request_success',
