@@ -3,9 +3,11 @@ import Container from './styled/Container';
 
 const ShoeList = ({ shoesArray }) => (
   <Container flex>
-    {shoesArray.map((shoe) => (
-      <Shoe key={shoe._id} shoe={shoe} />
-    ))}
+    {shoesArray
+      .filter((shoe) => shoe.available)
+      .map((shoe) => (
+        <Shoe key={shoe._id} shoe={shoe} />
+      ))}
   </Container>
 );
 

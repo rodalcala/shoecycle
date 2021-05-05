@@ -29,7 +29,7 @@ async function handler(req, res) {
       from: process.env.SENDGRID_EMAIL,
       to: shoe.email,
       subject: `shoe request from ${request.name}`,
-      text: formatRequestBody(request, shoe),
+      html: formatRequestBody(request, shoe),
     });
 
     res.status(200).json('thanks for verifying your email! you are all set.');
