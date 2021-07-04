@@ -1,6 +1,6 @@
 import Requests from './mongoose/requests.schema';
 import Shoes from './mongoose/shoes.schema';
-import mailer, { formatVerificationBody } from '../../lib/mailer';
+import mailer, { formatRequestVerificationBody, formatShoeVerificationBody } from '../../lib/mailer';
 
 const resolvers = {
   Query: {
@@ -26,6 +26,15 @@ const resolvers = {
     async addShoe(_, { shoe }) {
       try {
         const newShoe = await Shoes.create(shoe);
+
+        /* NOTE: Verify giver's email before making the shoe available */
+        mailer.send({
+          from: process.env.SENDGRID_EMAIL,
+          to: newShoe.email,
+          subject: `verify your email for ${newShoe.brand} shoe`,
+          html: formatShoeVerificationBody(newShoe),
+        });
+
         return {
           success: true,
           message: 'shoe_creation_success',
@@ -68,8 +77,8 @@ const resolvers = {
         mailer.send({
           from: process.env.SENDGRID_EMAIL,
           to: request.email,
-          subject: `verify your email for shoe ${requestedShoe.brand}`,
-          html: formatVerificationBody(request, requestedShoe),
+          subject: `verify your email for ${requestedShoe.brand} shoe`,
+          html: formatRequestVerificationBody(request, requestedShoe),
         });
 
         return {
