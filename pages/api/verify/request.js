@@ -1,6 +1,6 @@
-import mailer, { formatRequestBody } from '../../lib/mailer';
-import connectDB from '../../lib/mongoose';
-import Shoes from '../../src/api/mongoose/shoes.schema';
+import mailer, { formatShoeRequestBody } from '../../../lib/mailer';
+import connectDB from '../../../lib/mongoose';
+import Shoes from '../../../src/api/mongoose/shoes.schema';
 
 async function handler(req, res) {
   try {
@@ -29,13 +29,13 @@ async function handler(req, res) {
       from: process.env.SENDGRID_EMAIL,
       to: shoe.email,
       subject: `shoe request from ${request.name}`,
-      html: formatRequestBody(request, shoe),
+      html: formatShoeRequestBody(request, shoe),
     });
 
     res.status(200).json('thanks for verifying your email! you are all set.');
   } catch (e) {
-    console.error('email verification error:', e);
-    res.status(500).json('error during verification, please try again.');
+    console.error('email verification (request) error:', e);
+    res.status(500).json('error during request verification, please try again.');
   }
 }
 

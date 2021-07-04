@@ -50,7 +50,7 @@ const ShoesSchema = new Schema(
     images: [String],
     available: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     ships: {
       type: Boolean,
