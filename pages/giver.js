@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useMutation } from '@apollo/react-hooks';
 import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
@@ -8,9 +7,9 @@ import gql from 'graphql-tag';
 import { withApollo } from './../lib/apollo';
 
 import Layout from '../components/Layout';
+import Navbar from '../components/Navbar';
 import ShoeForm from './../components/ShoeForm';
 import Container from '../components/styled/Container';
-import Header from '../components/styled/Header';
 
 const SuccessModalWithoutSSR = dynamic(
   () => import('../components/SuccessModal'),
@@ -78,15 +77,10 @@ const Giver = () => {
   return (
     <Layout>
       {isModalOpen ? _renderModal() : null}
-      <Header>
-        <Container>
-          <Link href="/">
-            <h1>shoecycle</h1>
-          </Link>
-          <h3>RECYCLE UR SHOES</h3>
-        </Container>
-      </Header>
-      <ShoeForm handleSubmit={handleSubmit} />
+      <Navbar />
+      <Container>
+        <ShoeForm handleSubmit={handleSubmit} />
+      </Container>
     </Layout>
   );
 };

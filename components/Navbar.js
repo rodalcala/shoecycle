@@ -6,7 +6,7 @@ const Header = styled.header`
   padding: 3em 0;
   margin: 0;
   width: 75%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 
   @media (min-width: 700px) {

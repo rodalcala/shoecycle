@@ -1,53 +1,47 @@
-import Link from 'next/link';
-import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+
+import { withApollo } from './../lib/apollo';
 
 import Layout from '../components/Layout';
-import Container from '../components/styled/Container';
-import Button from '../components/styled/Button';
+import ShoeList from '../components/ShoeList';
+import Navbar from '../components/Navbar';
 
-const Section = styled.section`
-  padding: 3em 0;
-  background-color: ${(props) =>
-    props.secondary ? props.theme.colours.secondary : null};
+const GET_ALL_SHOES = gql`
+  query getAllShoes {
+    shoes {
+      _id
+      ownerName
+      email
+      verifiedEmail
+      brand
+      model
+      isFemaleShoe
+      isTrailShoe
+      size
+      kilometers
+      country
+      city
+      images
+      available
+      ships
+      intShipping
+      paidShipping
+    }
+  }
 `;
 
-const Home = () => {
+const Receiver = () => {
+  const { data, loading, error } = useQuery(GET_ALL_SHOES);
+
+  if (loading || error) return null;
+
   return (
     <Layout>
-      <Section>
-        <Container main>
-          <Link href="/">
-            <h1>shoecycle</h1>
-          </Link>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
-        </Container>
-      </Section>
-      <Section secondary>
-        <Container flex center>
-          <Link href="/giver">
-            <Button margin="1em" primary>giving</Button>
-          </Link>
-          <Link href="/receiver">
-            <Button margin="1em">receiving</Button>
-          </Link>
-        </Container>
-      </Section>
-      <Section>
-        <Container>
-          <h2>about us</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
-        </Container>
-      </Section>
+      <Navbar />
+      <ShoeList shoesArray={data.shoes} />
     </Layout>
   );
 };
 
-export default Home;
+export default withApollo(Receiver);
