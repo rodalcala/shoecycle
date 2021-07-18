@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 
@@ -9,7 +10,7 @@ const Main = styled.main`
 `;
 
 const Layout = ({ children }) => (
-  <div>
+  <Fragment>
     <Head>
       <title>shoecycle</title>
       <link rel="icon" href="/favicon.ico" />
@@ -19,7 +20,7 @@ const Layout = ({ children }) => (
       />
     </Head>
     <Main>{children}</Main>
-  </div>
+  </Fragment>
 );
 
 export default Layout;
