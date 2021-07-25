@@ -40,8 +40,9 @@ const kilometersOptions = [
 ];
 
 const Form = styled.form`
+  width: 75%;
   margin: 0 auto;
-  width: 80%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

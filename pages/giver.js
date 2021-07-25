@@ -9,7 +9,6 @@ import { withApollo } from './../lib/apollo';
 import Layout from '../components/Layout';
 import Navbar from '../components/Navbar';
 import ShoeForm from './../components/ShoeForm';
-import Container from '../components/styled/Container';
 
 const SuccessModalWithoutSSR = dynamic(
   () => import('../components/SuccessModal'),
@@ -78,9 +77,7 @@ const Giver = () => {
     <Layout>
       {isModalOpen ? _renderModal() : null}
       <Navbar />
-      <Container>
-        <ShoeForm handleSubmit={handleSubmit} />
-      </Container>
+      <ShoeForm handleSubmit={handleSubmit} />
     </Layout>
   );
 };
