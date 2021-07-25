@@ -8,17 +8,15 @@ const ShoeBox = styled.div`
   background-size: cover;
   width: 79vw;
   min-width: 250px;
-  max-width: 300px;
+  max-width: 285px;
   height: 80vw;
   min-height: 250px;
-  max-height: 300px;
+  max-height: 285px;
   position: relative;
-  margin-bottom: 1vw;
-  margin-right: 1vw;
   font-size: 12px;
 
   @media (min-width: 368px) {
-    font-size: 15px;
+    font-size: 14px;
   }
 `;
 

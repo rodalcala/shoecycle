@@ -1,8 +1,18 @@
+import styled from 'styled-components';
+
 import Shoe from './Shoe';
-import Container from './styled/Container';
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 1vw;
+`;
 
 const ShoeList = ({ shoesArray }) => (
-  <Container flex>
+  <Container>
     {shoesArray
       .filter((shoe) => shoe.available)
       .map((shoe) => (
