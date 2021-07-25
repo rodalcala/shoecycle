@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
@@ -9,9 +8,8 @@ import gql from 'graphql-tag';
 import { withApollo } from '../../lib/apollo';
 
 import Layout from '../../components/Layout';
+import Navbar from '../../components/Navbar';
 import Button from '../../components/styled/Button';
-import Container from '../../components/styled/Container';
-import Header from '../../components/styled/Header';
 
 const RequestModalWithoutSSR = dynamic(
   () => import('../../components/RequestModal'),
@@ -29,7 +27,7 @@ const SpecificationContainer = styled.div`
   overflow: hidden;
   font-size: ${(props) => `${props.size}em` || '1em'};
 
-  > h1 {
+  > h3 {
     margin-left: 0.2em; /* Needs to be a bit bigger than h4's font-size */
     font-size: 3em;
     text-align: left;
@@ -46,6 +44,15 @@ const SpecificationContainer = styled.div`
     height: 100%;
     text-align: center;
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 75%;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 const GET_SHOE_BY_ID = gql`
@@ -150,31 +157,24 @@ const ShoeDetailedView = () => {
     <Layout>
       {isSuccessModalOpen ? _renderSuccessModal() : null}
       {isRequestModalOpen ? _renderRequestModal() : null}
-      <Header>
-        <Container>
-          <Link href="/">
-            <h1>shoecycle</h1>
-          </Link>
-          <h3>AVAILABLE SHOE</h3>
-        </Container>
-      </Header>
+      <Navbar />
       <Container flex>
         <SpecificationContainer size={2}>
           <h4>brand</h4>
-          <h1>{brand}</h1>
+          <h3>{brand}</h3>
         </SpecificationContainer>
         <SpecificationContainer>
           <h4>model</h4>
-          <h1>{model}</h1>
+          <h3>{model}</h3>
         </SpecificationContainer>
         <div>
           <SpecificationContainer>
             <h4>gender</h4>
-            <h1>{isFemaleShoe ? 'female' : 'male'}</h1>
+            <h3>{isFemaleShoe ? 'female' : 'male'}</h3>
           </SpecificationContainer>
           <SpecificationContainer>
             <h4>surface</h4>
-            <h1>{isTrailShoe ? 'trail' : 'road'}</h1>
+            <h3>{isTrailShoe ? 'trail' : 'road'}</h3>
           </SpecificationContainer>
         </div>
         <Button primary square margin={'.2em'} onClick={openRequestModal}>
@@ -182,34 +182,34 @@ const ShoeDetailedView = () => {
         </Button>
         <SpecificationContainer size={2.5}>
           <h4>size</h4>
-          <h1>{size}</h1>
+          <h3>{size}</h3>
         </SpecificationContainer>
         <SpecificationContainer size={2}>
           <h4>kms</h4>
-          <h1>{kilometers}</h1>
+          <h3>{kilometers}</h3>
         </SpecificationContainer>
         <div>
           <SpecificationContainer>
             <h4>country</h4>
-            <h1>{country}</h1>
+            <h3>{country}</h3>
           </SpecificationContainer>
           <SpecificationContainer>
             <h4>city</h4>
-            <h1>{city}</h1>
+            <h3>{city}</h3>
           </SpecificationContainer>
         </div>
         <SpecificationContainer size={2}>
           <h4>ships</h4>
-          <h1>{ships ? 'YES' : 'NO'}</h1>
+          <h3>{ships ? 'YES' : 'NO'}</h3>
         </SpecificationContainer>
         <div>
           <SpecificationContainer>
             <h4>int nat</h4>
-            <h1>{intShipping ? 'YES' : 'NO'}</h1>
+            <h3>{intShipping ? 'YES' : 'NO'}</h3>
           </SpecificationContainer>
           <SpecificationContainer>
             <h4>paid</h4>
-            <h1>{paidShipping ? 'YES' : 'NO'}</h1>
+            <h3>{paidShipping ? 'YES' : 'NO'}</h3>
           </SpecificationContainer>
         </div>
       </Container>

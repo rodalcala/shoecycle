@@ -1,6 +1,26 @@
+import styled from 'styled-components';
+
 import Layout from '../components/Layout';
-import Container from '../components/styled/Container';
 import Navbar from '../components/Navbar';
+
+const Container = styled.div`
+  width: 75%;
+  max-width: 900px;
+  margin: 0 auto;
+
+  > h2 {
+    font-size: 2.5rem;
+    padding-bottom: 1em;
+    color: ${(props) => props.theme.colours.secondary};
+  }
+
+  > p {
+    padding-top: ${(props) => props.main && '3em'};
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+`;
 
 const Home = () => {
   return (
