@@ -1,41 +1,17 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import countries from '../src/countries+cities.json';
 
 import Button from './styled/Button';
 
 const sizeOptions = [
-  6,
-  6.5,
-  7,
-  7.5,
-  8,
-  8.5,
-  9,
-  9.5,
-  10,
-  10.5,
-  11,
-  11.5,
-  12,
-  12.5,
-  13,
+  6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13,
 ];
 const kilometersOptions = [
-  0,
-  5,
-  10,
-  15,
-  20,
-  30,
-  40,
-  50,
-  70,
-  90,
-  120,
-  150,
-  199,
-  200,
+  0, 5, 10, 15, 20, 30, 40, 50, 70, 90, 120, 150, 199, 200,
 ];
 
 const Form = styled.form`
@@ -85,7 +61,8 @@ const Field = styled.div`
   }
 
   > input[type='checkbox']:disabled {
-    background-color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
+    background-color: ${(props) =>
+      props.disabled ? props.theme.colours.disabled : null};
   }
 
   > select {
@@ -105,11 +82,15 @@ const Field = styled.div`
   > label {
     vertical-align: middle;
     margin-left: 0.2em;
-    color: ${(props) => props.disabled ? props.theme.colours.disabled : null};
+    color: ${(props) => (props.disabled ? props.theme.colours.disabled : null)};
   }
 `;
 
 const ShoeForm = ({ addShoe }) => {
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [selectedCity, setSelectedCity] = useState();
+  const countryDetails = countries.find((country) => country.name === selectedCountry)
+
   const formik = useFormik({
     initialValues: {
       ownerName: '',
@@ -157,6 +138,16 @@ const ShoeForm = ({ addShoe }) => {
     formik.touched[id] && formik.errors[id] ? (
       <div>{formik.errors[id]}</div>
     ) : null;
+
+  const handleChangeCountry = (e) => {
+    console.log('@country', e.target.value);
+    setSelectedCountry(e.target.value);
+  };
+
+  const handleChangeCity = (e) => {
+    console.log('@city', e.target.value);
+    setSelectedCity(e.target.value);
+  };
 
   return (
     <Form onSubmit={formik.handleSubmit}>
@@ -260,9 +251,20 @@ const ShoeForm = ({ addShoe }) => {
         <input
           placeholder="country"
           name="country"
-          {...formik.getFieldProps('country')}
           type="text"
+          {...formik.getFieldProps('country')}
+          value={selectedCountry}
+          id="input"
+          list="options"
+          onChange={handleChangeCountry}
         />
+        <datalist id="options">
+          {countries.map((country) => (
+            <option value={country.name} key={country.id}>
+              {country.name}
+            </option>
+          ))}
+        </datalist>
         {_renderError('country')}
       </Field>
 
@@ -272,7 +274,20 @@ const ShoeForm = ({ addShoe }) => {
           name="city"
           {...formik.getFieldProps('city')}
           type="text"
+          value={selectedCity}
+          id="input"
+          list="options2"
+          onChange={handleChangeCity}
         />
+        <datalist id="options2">
+          {!countryDetails
+            ? null
+            : countryDetails.cities.map((city) => (
+                <option value={city.name} key={city.id}>
+                  {city.name}
+                </option>
+              ))}
+        </datalist>
       </Field>
 
       <Field>
